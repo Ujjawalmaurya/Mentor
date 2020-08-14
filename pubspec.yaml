@@ -12,7 +12,12 @@ dependencies:
 
   cupertino_icons: ^0.1.3
   font_awesome_flutter:
-
+  firebase_auth:
+  firebase_core:
+  cloud_firestore:
+  google_sign_in: ^4.5.1
+  shared_preferences: ^0.5.8
+  firebase_database:
 dev_dependencies:
   flutter_test:
     sdk: flutter
