@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mentor_digishala/constants.dart';
 import 'package:mentor_digishala/homePage.dart';
 import 'package:mentor_digishala/loginPage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,9 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: FirebaseAuth.instance.currentUser() != null
-          ? HomePage.id
-          : LoginScreen.id,
+      initialRoute: LoginScreen.id,
       routes: {
         LoginScreen.id: (context) => LoginScreen(),
         HomePage.id: (context) => HomePage()
