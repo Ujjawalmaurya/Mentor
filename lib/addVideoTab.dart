@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 
 class AddVideoTab extends StatefulWidget {
   @override
@@ -8,6 +11,7 @@ class AddVideoTab extends StatefulWidget {
 }
 
 class _AddVideoTabState extends State<AddVideoTab> {
+  String title;
   String link;
   String selectedClass = '';
   String selectedSubject = '';
@@ -16,6 +20,39 @@ class _AddVideoTabState extends State<AddVideoTab> {
   userGetter() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     print(user.email);
+  }
+
+  //title fetching fxn for more info follow https://stackoverflow.com/questions/60693146/getting-youtube-video-details-in-flutter-dart
+  Future<dynamic> getTitle(String linkUrl) async {
+    String embedUrl = "https://www.youtube.com/oembed?url=$linkUrl&format=json";
+
+    //store http request response to res variable
+    var res = await http.get(embedUrl);
+    print(res.toString());
+    print("get youtube detail status code: " + res.statusCode.toString());
+
+    try {
+      if (res.statusCode == 200) {
+        //return the json from the response
+        return json.decode(res.body);
+      } else {
+        //return null if status code other than 200
+        return null;
+      }
+    } on FormatException catch (e) {
+      print('invalid JSON' + e.toString());
+      //return null if error
+      return null;
+    }
+  }
+
+  fetchUrl() async {
+    String videoUrl = this.link;
+
+    var jsonData = await getTitle(videoUrl);
+    setState(() {
+      title = jsonData['title'];
+    });
   }
 
   @override
@@ -44,10 +81,11 @@ class _AddVideoTabState extends State<AddVideoTab> {
                     return "Field is required";
                   }
                 },
-                onSaved: (value) {
+                onChanged: (value) {
                   setState(() {
                     link = value;
                   });
+                  fetchUrl();
                 },
                 decoration: InputDecoration(
                   hintText: 'Paste link Here',
@@ -139,11 +177,33 @@ class _AddVideoTabState extends State<AddVideoTab> {
                   }).toList(),
                 ),
               ),
+              Divider(),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Title Shows below',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple,
+                          fontSize: 18),
+                    ),
+                    Text(
+                      this.title == null ? ('null..') : (this.title),
+                    )
+                  ],
+                ),
+              ),
               Divider(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (_key.currentState.validate()) {
+                    _key.currentState.save();
+                  }
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 elevation: 10.0,
