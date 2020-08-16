@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddVideoTab extends StatefulWidget {
   @override
@@ -51,7 +53,9 @@ class _AddVideoTabState extends State<AddVideoTab> {
                 },
                 decoration: InputDecoration(
                   hintText: 'Paste link Here',
-                  icon: Icon(
+                  icon:
+                      //  FaIcon(FontAwesomeIcons.link),
+                      Icon(
                     Icons.line_style,
                     color: Colors.purple,
                   ),
@@ -143,7 +147,12 @@ class _AddVideoTabState extends State<AddVideoTab> {
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  SharedPreferences login =
+                      await SharedPreferences.getInstance();
+                  final result = await login.getBool('isLog') ?? false;
+                  print(result);
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 elevation: 10.0,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mentor_digishala/homePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'loginPage';
@@ -13,6 +14,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   GlobalKey<FormState> _key = new GlobalKey();
   String email, pass, errorMsg;
+  bool isLggedIn;
+
   FirebaseAuth _auth = FirebaseAuth.instance;
 //SignIn with email Fxn
   signIn() async {
@@ -24,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
       print(user);
       if (user != null) {
         //Navigation
+        makeLogin();
         Navigator.pushReplacementNamed(context, HomePage.id);
       }
     } catch (e) {
@@ -34,22 +38,46 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  //LogIn Checker
-  loggedInOrNot() async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    try {
-      if (user.email != null) {
-        Navigator.pushReplacementNamed(context, HomePage.id);
-      } else {
-        print('not logged');
-      }
-    } catch (e) {
-      setState(() {
-        errorMsg = e.message;
-      });
-      errorDialog();
-    }
+  makeLogin() async {
+    SharedPreferences login = await SharedPreferences.getInstance();
+    setState(() {
+      isLggedIn = true;
+      print(isLggedIn);
+    });
+    await login.setBool('islog', true);
   }
+
+  getLogininfo() async {
+    SharedPreferences login = await SharedPreferences.getInstance();
+    final bool = await login.getBool('isLog') ?? false;
+    print(bool);
+  }
+
+  makeLogout() async {
+    SharedPreferences login = await SharedPreferences.getInstance();
+    setState(() {
+      isLggedIn = false;
+    });
+    await login.setBool('islog', false);
+  }
+
+  // LogIn Checker
+  // loggedInOrNot() async {
+  //   FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  //   try {
+  //     if (user.email != null) {
+  //       Navigator.pushReplacementNamed(context, HomePage.id);
+  //       makeLogin();
+  //     } else {
+  //       print('not logged');
+  //     }
+  //   } catch (e) {
+  //     setState(() {
+  //       errorMsg = e.message;
+  //     });
+  //     errorDialog();
+  //   }
+  // }
 
   //Error dialogbox
   errorDialog() {
@@ -84,11 +112,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    loggedInOrNot();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  // loggedInOrNot();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -170,8 +198,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 50.0,
                           width: 220.0,
                           child: RaisedButton(
+                              // onLongPress: () {
+                              //   noCheckLogin();
+                              // },
                               onPressed: () {
                                 ///Perform action
+                                // makeLogin();
                                 if (_key.currentState.validate()) {
                                   _key.currentState.save();
                                   signIn();
@@ -204,7 +236,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: Colors.white,
                                     // fontFamily: 'Pacifico',
                                   )),
-                              onPressed: () {},
+                              onPressed: () {
+                                getLogininfo();
+                              },
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25.0)))),
                       Padding(padding: EdgeInsets.all(25.0)),
