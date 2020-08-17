@@ -63,24 +63,24 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // LogIn Checker
-  // loggedInOrNot() async {
-  //   FirebaseUser user = await FirebaseAuth.instance.currentUser();
-  //   try {
-  //     if (user.email != null) {
-  //       Navigator.pushReplacementNamed(context, HomePage.id);
-  //       makeLogin();
-  //     } else {
-  //       print('not logged');
-  //     }
-  //   } catch (e) {
-  //     setState(() {
-  //       errorMsg = e.message;
-  //     });
-  //     errorDialog();
-  //   }
-  // }
+  loggedInOrNot() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    try {
+      if (user.email != null) {
+        Navigator.pushReplacementNamed(context, HomePage.id);
+        makeLogin();
+      } else {
+        print('not logged');
+      }
+    } catch (e) {
+      setState(() {
+        errorMsg = e.message;
+      });
+      errorDialog();
+    }
+  }
 
-  //Error dialogbox
+  // Error dialogbox
   errorDialog() {
     showDialog(
       context: context,
@@ -113,11 +113,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // loggedInOrNot();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    loggedInOrNot();
+  }
 
   @override
   Widget build(BuildContext context) {
