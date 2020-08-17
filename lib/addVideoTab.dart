@@ -147,12 +147,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
               RaisedButton(
-                onPressed: () async {
-                  SharedPreferences login =
-                      await SharedPreferences.getInstance();
-                  final result = await login.getBool('isLog') ?? false;
-                  print(result);
-                },
+                onPressed: () {},
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 elevation: 10.0,

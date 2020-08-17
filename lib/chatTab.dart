@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_digishala/loginPage.dart';
 import 'constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatTab extends StatelessWidget {
   const ChatTab({
@@ -9,13 +11,46 @@ class ChatTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: kContainerThemeDecoration,
+      // decoration: kContainerThemeDecoration,
       child: SingleChildScrollView(
         child: Column(
           children: [
+            ////================================================================
+            RaisedButton(
+              child: Text('Log IN'),
+              onPressed: () async {
+                /// Add Function to logout Button
+                final _login = await SharedPreferences.getInstance();
+                bool login = await _login.setBool('islog', true);
+                print(login);
+              },
+              color: Colors.indigo,
+            ), ///////////////////////////////////////////
+            RaisedButton(
+              child: Text('check'),
+              onPressed: () async {
+                /// Add Function to logout Button
+                SharedPreferences _login =
+                    await SharedPreferences.getInstance();
+                final login = _login.getBool('isloged') ?? false;
+                print("Status: $login");
+              },
+              color: Colors.indigo,
+            ), ////////////////////////////////////////////////
+            RaisedButton(
+              child: Text('Logout'),
+              onPressed: () async {
+                /// Add Function to logout Button
+                SharedPreferences _login =
+                    await SharedPreferences.getInstance();
+                bool login = await _login.setBool('islog', false);
+                print(login);
+              },
+              color: Colors.indigo,
+            ), ////=========================================================
             SizedBox(
-              child: Text("Used Sized Box for distance"),
-              height: 580,
+              // child: Text("Used Sized Box for distance"),
+              height: 50,
             ),
             Container(
               decoration: BoxDecoration(

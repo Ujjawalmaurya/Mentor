@@ -39,18 +39,18 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   makeLogin() async {
-    SharedPreferences login = await SharedPreferences.getInstance();
+    SharedPreferences _login = await SharedPreferences.getInstance();
     setState(() {
       isLggedIn = true;
       print(isLggedIn);
     });
-    await login.setBool('islog', true);
+    await _login.setBool('isloged', true);
   }
 
   getLogininfo() async {
-    SharedPreferences login = await SharedPreferences.getInstance();
-    final bool = await login.getBool('isLog') ?? false;
-    print(bool);
+    SharedPreferences _login = await SharedPreferences.getInstance();
+    final login = _login.getBool('isloged') ?? false;
+    print("Status: $login");
   }
 
   makeLogout() async {
@@ -59,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
       isLggedIn = false;
     });
     await login.setBool('islog', false);
+    print(login);
   }
 
   // LogIn Checker
@@ -197,6 +198,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                           height: 50.0,
                           width: 220.0,
+                          /////////////////////////////////////////////////////
+                          ///===================Get-IN Button=======///////////
+                          /////////////////////////////////////////////////////
                           child: RaisedButton(
                               // onLongPress: () {
                               //   noCheckLogin();
@@ -236,8 +240,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: Colors.white,
                                     // fontFamily: 'Pacifico',
                                   )),
-                              onPressed: () {
-                                getLogininfo();
+                              onPressed: () async {
+                                SharedPreferences _login =
+                                    await SharedPreferences.getInstance();
+                                final login =
+                                    _login.getBool('isloged') ?? false;
+                                print("Status: $login");
                               },
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25.0)))),
