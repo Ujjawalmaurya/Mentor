@@ -20,9 +20,9 @@ class ChatTab extends StatelessWidget {
               child: Text('Log IN'),
               onPressed: () async {
                 /// Add Function to logout Button
-                // final _login = await SharedPreferences.getInstance();
-                // bool login = await _login.setBool('islog', true);
-                // print(login);
+                final _login = await SharedPreferences.getInstance();
+                bool login = await _login.setBool('islog', true);
+                print(login);
               },
               color: Colors.indigo,
             ), ///////////////////////////////////////////
