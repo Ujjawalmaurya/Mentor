@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
           body: TabBarView(
             children: [
               ///===============================================================Chats Tab
-              ChatTab(),
+              chatTab(),
 
               ///===============================================================Adding Video Tab
               AddVideoTab(),

@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
       print(user);
       if (user != null) {
         //Navigation
-        makeLogin();
+
         Navigator.pushReplacementNamed(context, HomePage.id);
       }
     } catch (e) {
@@ -38,47 +38,22 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  makeLogin() async {
-    SharedPreferences _login = await SharedPreferences.getInstance();
-    setState(() {
-      isLggedIn = true;
-      print(isLggedIn);
-    });
-    await _login.setBool('isloged', true);
-  }
-
-  getLogininfo() async {
-    SharedPreferences _login = await SharedPreferences.getInstance();
-    final login = _login.getBool('isloged') ?? false;
-    print("Status: $login");
-  }
-
-  makeLogout() async {
-    SharedPreferences login = await SharedPreferences.getInstance();
-    setState(() {
-      isLggedIn = false;
-    });
-    await login.setBool('islog', false);
-    print(login);
-  }
-
   // LogIn Checker
-  // loggedInOrNot() async {
-  //   FirebaseUser user = await FirebaseAuth.instance.currentUser();
-  //   try {
-  //     if (user.email != null) {
-  //       Navigator.pushReplacementNamed(context, HomePage.id);
-  //       makeLogin();
-  //     } else {
-  //       print('not logged');
-  //     }
-  //   } catch (e) {
-  //     setState(() {
-  //       errorMsg = e.message;
-  //     });
-  //     errorDialog();
-  //   }
-  // }
+  loggedInOrNot() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    try {
+      if (user.email != null) {
+        Navigator.pushReplacementNamed(context, HomePage.id);
+      } else {
+        print('not logged');
+      }
+    } catch (e) {
+      setState(() {
+        errorMsg = e.message;
+      });
+      errorDialog();
+    }
+  }
 
   //Error dialogbox
   errorDialog() {
@@ -113,11 +88,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // loggedInOrNot();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    loggedInOrNot();
+  }
 
   @override
   Widget build(BuildContext context) {
