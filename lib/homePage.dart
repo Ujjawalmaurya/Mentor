@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mentor_digishala/listDb.dart';
 import 'chatTab.dart';
 import 'addVideoTab.dart';
 
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.deepPurpleAccent,
@@ -35,6 +36,9 @@ class _HomePageState extends State<HomePage> {
                 Tab(
                     icon: FaIcon(FontAwesomeIcons.plusSquare),
                     text: 'Add a Video'),
+                Tab(
+                    icon: FaIcon(FontAwesomeIcons.database),
+                    text: 'Added link ')
               ],
             ),
             title: Text('Mentor -DigiShala'),
@@ -46,6 +50,7 @@ class _HomePageState extends State<HomePage> {
 
               ///===============================================================Adding Video Tab
               AddVideoTab(),
+              ListDb(),
             ],
           ),
         ),
