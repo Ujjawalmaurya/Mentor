@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 // import 'package:mentor_digishala/constants.dart';
 import 'package:mentor_digishala/homePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'loginPage';
@@ -10,7 +12,87 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String email, pass;
+  GlobalKey<FormState> _key = new GlobalKey();
+  String email, pass, errorMsg;
+  bool isLggedIn;
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+//SignIn with email Fxn
+  signIn() async {
+    print('signin executed');
+    try {
+      AuthResult result = await _auth.signInWithEmailAndPassword(
+          email: this.email, password: this.pass);
+      final FirebaseUser user = result.user;
+      print(user);
+      if (user != null) {
+        //Navigation
+
+        Navigator.pushReplacementNamed(context, HomePage.id);
+      }
+    } catch (e) {
+      setState(() {
+        errorMsg = e.message;
+      });
+      errorDialog();
+    }
+  }
+
+  // LogIn Checker
+  loggedInOrNot() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    try {
+      if (user.email != null) {
+        Navigator.pushReplacementNamed(context, HomePage.id);
+      } else {
+        print('not logged');
+      }
+    } catch (e) {
+      setState(() {
+        errorMsg = e.message;
+      });
+      errorDialog();
+    }
+  }
+
+  //Error dialogbox
+  errorDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          elevation: 10.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          title: Text(
+            'Error',
+            style: TextStyle(color: Colors.red),
+          ),
+          content: Text(errorMsg),
+          actions: [
+            FlatButton(
+              color: Colors.red,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+                side: BorderSide(color: Colors.red, width: 2),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Ok"),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loggedInOrNot();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       backgroundImage: AssetImage('assets/mascot.png'))),
               SizedBox(height: 90.0),
               Form(
-                // key: _key,
+                key: _key,
                 child: Card(
                   margin: EdgeInsets.all(15.0),
                   shape: RoundedRectangleBorder(
@@ -91,10 +173,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                           height: 50.0,
                           width: 220.0,
+                          /////////////////////////////////////////////////////
+                          ///===================Get-IN Button=======///////////
+                          /////////////////////////////////////////////////////
                           child: RaisedButton(
+                              // onLongPress: () {
+                              //   noCheckLogin();
+                              // },
                               onPressed: () {
                                 ///Perform action
-                                Navigator.pushNamed(context, HomePage.id);
+                                // makeLogin();
+                                if (_key.currentState.validate()) {
+                                  _key.currentState.save();
+                                  signIn();
+                                }
                               },
                               color: Colors.redAccent,
                               splashColor: Colors.deepPurpleAccent,
@@ -123,7 +215,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: Colors.white,
                                     // fontFamily: 'Pacifico',
                                   )),
-                              onPressed: () {},
+                              onPressed: () async {
+                                SharedPreferences _login =
+                                    await SharedPreferences.getInstance();
+                                final login =
+                                    _login.getBool('isloged') ?? false;
+                                print("Status: $login");
+                              },
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25.0)))),
                       Padding(padding: EdgeInsets.all(25.0)),

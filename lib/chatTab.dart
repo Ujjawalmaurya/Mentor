@@ -1,56 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_digishala/loginPage.dart';
 import 'constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class ChatTab extends StatelessWidget {
-  const ChatTab({
-    Key key,
-  }) : super(key: key);
+class chatTab extends StatefulWidget {
+  @override
+  _chatTabState createState() => _chatTabState();
+}
 
+class _chatTabState extends State<chatTab> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: kContainerThemeDecoration,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              child: Text("Used Sized Box for distance"),
-              height: 580,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                ),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) {
-                        // chatMessage = value;
-                      },
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        hintText: 'Type your message here...',
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+      child: RaisedButton(
+        onPressed: () {
+          FirebaseAuth.instance.signOut();
+          Navigator.pushReplacementNamed(context, LoginScreen.id);
+        },
+        child: Text('logout'),
       ),
     );
   }
