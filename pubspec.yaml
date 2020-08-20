@@ -19,6 +19,10 @@ dependencies:
   shared_preferences: ^0.5.8
   firebase_database: null
   fluttertoast: ^7.0.2
+  file_picker: ^1.13.3
+  firebase_storage:
+  url_launcher: ^5.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mentor_digishala/homePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'loginPage';
@@ -29,23 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
         //Navigation
 
         Navigator.pushReplacementNamed(context, HomePage.id);
-      }
-    } catch (e) {
-      setState(() {
-        errorMsg = e.message;
-      });
-      errorDialog();
-    }
-  }
-
-  // LogIn Checker
-  loggedInOrNot() async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    try {
-      if (user.email != null) {
-        Navigator.pushReplacementNamed(context, HomePage.id);
-      } else {
-        print('not logged');
       }
     } catch (e) {
       setState(() {
@@ -86,12 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loggedInOrNot();
   }
 
   @override
@@ -216,11 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     // fontFamily: 'Pacifico',
                                   )),
                               onPressed: () async {
-                                SharedPreferences _login =
-                                    await SharedPreferences.getInstance();
-                                final login =
-                                    _login.getBool('isloged') ?? false;
-                                print("Status: $login");
+                                print('rem0ve this button');
                               },
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25.0)))),
