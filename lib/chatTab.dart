@@ -12,6 +12,7 @@ class _chatTabState extends State<chatTab> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(8.0),
       child: RaisedButton(
         onPressed: () {
           FirebaseAuth.instance.signOut();

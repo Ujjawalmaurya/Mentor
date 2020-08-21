@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mentor_digishala/constants.dart';
 import 'package:mentor_digishala/docsUpload.dart';
 import 'package:mentor_digishala/listDb.dart';
 import 'chatTab.dart';
@@ -20,44 +21,40 @@ class _HomePageState extends State<HomePage> {
         length: 4,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.deepPurpleAccent,
+            backgroundColor: kThemeColor,
             actions: [
               Hero(
                   tag: 'logo',
                   child: Image(image: AssetImage('assets/mascot.png')))
             ],
             bottom: TabBar(
-              indicatorWeight: 4.5,
-              indicatorColor: Colors.amberAccent,
+              labelColor: Colors.yellow,
+              unselectedLabelColor: Colors.blue,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorPadding: EdgeInsets.all(5.0),
+              indicatorColor: Colors.red,
+              indicatorWeight: 2.5,
               // isScrollable: true,
               tabs: [
-                Tab(
-                    icon: FaIcon(FontAwesomeIcons.facebookMessenger),
-                    text: 'Chats'),
-                Tab(
-                    icon: FaIcon(FontAwesomeIcons.plusSquare),
-                    text: 'Add a Video'),
-                Tab(
-                    icon: FaIcon(FontAwesomeIcons.database),
-                    text: 'Added link '),
-                Tab(
-                  icon: FaIcon(FontAwesomeIcons.dochub),
-                  text: 'Document upload Section',
-                ),
+                Tab(icon: FaIcon(FontAwesomeIcons.facebookMessenger)),
+                Tab(icon: FaIcon(FontAwesomeIcons.plusSquare)),
+                Tab(icon: FaIcon(FontAwesomeIcons.database)),
+                Tab(icon: FaIcon(FontAwesomeIcons.dochub)),
               ],
             ),
             title: Text('Mentor -DigiShala'),
           ),
           body: TabBarView(
             children: [
-              ///===============================================================Chats Tab
+              /////=========================
               chatTab(),
-
-              ///===============================================================Adding Video Tab
+              ////
               AddVideoTab(),
+              ////
               ListDb(),
-              DocsUpload()
-            ],
+              ////
+              DocsUpload(),
+            ], ////===================================
           ),
         ),
       ),

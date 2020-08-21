@@ -290,6 +290,7 @@ class _DocsUploadState extends State<DocsUpload> {
             child: CircularProgressIndicator(),
           )
         : Container(
+            padding: EdgeInsets.all(8.0),
             height: MediaQuery.of(context).size.height * 1,
             width: MediaQuery.of(context).size.width * 1,
             child: Form(

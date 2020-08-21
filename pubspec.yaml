@@ -11,13 +11,13 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^0.1.3
-  font_awesome_flutter: null
-  firebase_auth: null
-  firebase_core: null
-  cloud_firestore: null
+  font_awesome_flutter:
+  firebase_auth:
+  firebase_core:
+  cloud_firestore:
   google_sign_in: ^4.5.1
   shared_preferences: ^0.5.8
-  firebase_database: null
+  firebase_database:
   fluttertoast: ^7.0.2
   file_picker: ^1.13.3
   firebase_storage:
@@ -35,14 +35,3 @@ flutter:
     #   - images/a_dot_ham.jpeg
     #fonts:
     #- family: Schyler
-    #fonts:
-    #- asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 //======================================================================================
 
+const kThemeColor = Color(0xFF651FFF);
+
+//======================================================================================
+
 const kContainerThemeDecoration = BoxDecoration(
   image: DecorationImage(
     image: AssetImage(

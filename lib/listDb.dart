@@ -167,104 +167,101 @@ class _ListDbState extends State<ListDb> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        padding: EdgeInsets.all(8.0),
         height: MediaQuery.of(context).size.height * 1,
         width: MediaQuery.of(context).size.width * 1,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ListTile(
-              leading: Text('Select Class'),
-              trailing: DropdownButton<String>(
-                icon: Icon(Icons.arrow_drop_down),
-                value:
-                    (this.selectedClass == 'empty') ? null : this.selectedClass,
-                hint: Text('Select class'),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Colors.deepPurple),
-                underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
-                ),
-                onChanged: (String newValue) {
-                  setState(() {
-                    selectedClass = newValue;
-                  });
-                },
-                items: <String>['6', '7', '8', '9', '10']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+          ListTile(
+            leading: Text('Select Class'),
+            trailing: DropdownButton<String>(
+              icon: Icon(Icons.arrow_drop_down),
+              value:
+                  (this.selectedClass == 'empty') ? null : this.selectedClass,
+              hint: Text('Select class'),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
               ),
-            ),
-            ListTile(
-              leading: Text('Select Subject'),
-              trailing: DropdownButton<String>(
-                icon: Icon(Icons.arrow_drop_down),
-                value: (this.selectedSubject == 'empty')
-                    ? null
-                    : this.selectedSubject,
-                hint: Text('Select Subject'),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Colors.deepPurple),
-                underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
-                ),
-                onChanged: (String newValue) {
-                  setState(() {
-                    selectedSubject = newValue;
-                  });
-                },
-                items: <String>[
-                  'English',
-                  'Geography',
-                  'History',
-                  'Civics',
-                  'Economics',
-                  'Physics',
-                  'Chemistry',
-                  'Biology'
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-            ),
-            RaisedButton(
-              onPressed: () {
-                getData();
+              onChanged: (String newValue) {
+                setState(() {
+                  selectedClass = newValue;
+                });
               },
-              child: Text('getData'),
+              items: <String>['6', '7', '8', '9', '10']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
             ),
-            Expanded(
-                child: isLoading == 'true'
-                    ? Container(
-                        alignment: Alignment.center,
-                        height: MediaQuery.of(context).size.height / 10,
-                        child: CircularProgressIndicator(
-                          backgroundColor: Colors.deepPurple,
-                        ),
-                      )
-                    : ListView.builder(
-                        itemCount: datakey.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: Icon(Icons.date_range),
-                            title: Text(snapShotdata[index]['title']),
-                            onLongPress: () {
-                              deleteCnfmBox(datakey[index], index);
-                            },
-                          );
-                        },
-                      ))
-          ],
-        ));
+          ),
+          ListTile(
+            leading: Text('Select Subject'),
+            trailing: DropdownButton<String>(
+              icon: Icon(Icons.arrow_drop_down),
+              value: (this.selectedSubject == 'empty')
+                  ? null
+                  : this.selectedSubject,
+              hint: Text('Select Subject'),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String newValue) {
+                setState(() {
+                  selectedSubject = newValue;
+                });
+              },
+              items: <String>[
+                'English',
+                'Geography',
+                'History',
+                'Civics',
+                'Economics',
+                'Physics',
+                'Chemistry',
+                'Biology'
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
+          RaisedButton(
+            onPressed: () {
+              getData();
+            },
+            child: Text('getData'),
+          ),
+          Expanded(
+              child: isLoading == 'true'
+                  ? Container(
+                      alignment: Alignment.center,
+                      height: MediaQuery.of(context).size.height / 10,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.deepPurple,
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: datakey.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Icon(Icons.date_range),
+                          title: Text(snapShotdata[index]['title']),
+                          onLongPress: () {
+                            deleteCnfmBox(datakey[index], index);
+                          },
+                        );
+                      }))
+        ]));
   }
 }
