@@ -1,41 +1,19 @@
 import 'package:flutter/material.dart';
-// import 'package:mentor_digishala/constants.dart';
-import 'package:mentor_digishala/homePage.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mentor_digishala/homePage.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String id = 'loginPage';
+class SignUpPage extends StatefulWidget {
+  static const String id = 'registration';
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpPageState extends State<SignUpPage> {
   GlobalKey<FormState> _key = new GlobalKey();
-  String email, pass, errorMsg;
-  bool isLggedIn;
-
   FirebaseAuth _auth = FirebaseAuth.instance;
-//SignIn with email Fxn
-  signIn() async {
-    print('signin executed');
-    try {
-      AuthResult result = await _auth.signInWithEmailAndPassword(
-          email: this.email, password: this.pass);
-      final FirebaseUser user = result.user;
-      print(user);
-      if (user != null) {
-        //Navigation
-
-        Navigator.pushReplacementNamed(context, HomePage.id);
-      }
-    } catch (e) {
-      setState(() {
-        errorMsg = e.message;
-      });
-      errorDialog();
-    }
-  }
+  bool isLoading = false;
+  String email, pass, confPass, errorMsg;
 
   //Error dialogbox
   errorDialog() {
@@ -63,6 +41,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.of(context).pop();
                   },
                   child: Text("Ok"),
+                )
+              ]);
+        });
+  }
+
+  ///Pass Not Match dialog
+  errorPassDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              elevation: 10.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              title: Text(
+                'Error',
+                style: TextStyle(color: Colors.red),
+              ),
+              content: Text('Passwords are not matching'),
+              actions: [
+                FlatButton(
+                  color: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    side: BorderSide(color: Colors.red, width: 2),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Retry"),
                 )
               ]);
         });
@@ -120,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         decoration: InputDecoration(labelText: "Username"),
                         onSaved: (input) {
                           setState(() {
-                            email = input + '@mentor.nca';
+                            email = input + '@student.nca';
                           });
                           print(this.email);
                         },
@@ -143,33 +152,82 @@ class _LoginScreenState extends State<LoginScreen> {
                             decoration: InputDecoration(labelText: "Password"),
                             onSaved: (input) {
                               setState(() {
-                                pass = input;
+                                this.pass = input;
                               });
                               print(this.pass);
+                            })),
+                    ////===============
+                    ///Confirm Password
+                    ////===============
+                    ListTile(
+                        leading: FaIcon(FontAwesomeIcons.lock),
+                        title: TextFormField(
+                            obscureText: true,
+                            validator: (input) {
+                              if (input.isEmpty) {
+                                return 'Confirmation Password is required';
+                              } else if (input.length < 6) {
+                                return ' Confirmed Password is too short';
+                              }
+                            },
+                            decoration:
+                                InputDecoration(labelText: "Confirm Password"),
+                            onSaved: (input) {
+                              setState(() {
+                                this.confPass = input;
+                              });
+                              print(this.confPass);
                             })),
                     Padding(
                         padding: EdgeInsets.all(
                             MediaQuery.of(context).size.height * 0.02)),
                     Container(
                         height: 50.0,
-                        width: MediaQuery.of(context).size.width * 0.65,
+                        width: 220.0,
                         /////////////////////////////////////////////////////
-                        ///===================Get-IN Button=======///////////
+                        ///===========Add New Student Button======///////////
                         /////////////////////////////////////////////////////
                         child: RaisedButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              // print("email: ${email} and pass: ${pass}");
                               if (_key.currentState.validate()) {
                                 _key.currentState.save();
-                                signIn();
+                                if (pass == confPass) {
+                                  try {
+                                    final newUser = await _auth
+                                        .createUserWithEmailAndPassword(
+                                            email: email, password: pass);
+                                    if (newUser != null) {
+                                      Navigator.pushReplacementNamed(
+                                          context, HomePage.id);
+                                    }
+                                  } catch (e) {
+                                    setState(() {
+                                      errorMsg = e.message;
+                                    });
+                                    errorDialog();
+                                  }
+                                } else {
+                                  errorPassDialog();
+                                }
                               }
                             },
-                            color: Colors.redAccent,
+                            color: Colors.lightBlueAccent,
                             splashColor: Colors.deepPurpleAccent,
-                            child: Text("Get in",
-                                style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: Colors.white,
-                                    fontFamily: 'Pacifico')),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.plus,
+                                  color: Colors.deepOrangeAccent,
+                                ),
+                                Text("Add New Student",
+                                    style: TextStyle(
+                                        fontSize: 20.0, color: Colors.white)),
+                              ],
+                            )
+                            //
+                            ,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25.0)))),
                     Padding(
@@ -185,3 +243,21 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+/////===========================================================================
+// signup execution
+
+// onPressed: () async {
+//                 print("${email} and ${pass}");
+
+//                 try {
+//                   final newUser = await _auth.createUserWithEmailAndPassword(
+//                       email: email, password: pass);
+//                   if (newUser != null) {
+//                     Navigator.pushNamed(context, HomePage.id);
+//                   }
+//                 } catch (e) {
+//                   print(e);
+//                 }
+//               },
+////============================================================================

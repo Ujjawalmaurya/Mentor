@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentor_digishala/constants.dart';
-import 'package:mentor_digishala/docsUpload.dart';
-import 'package:mentor_digishala/listDb.dart';
-import 'chatTab.dart';
-import 'addVideoTab.dart';
+import 'package:mentor_digishala/tabs/docsUpload.dart';
+import 'package:mentor_digishala/tabs/listDb.dart';
+import 'tabs/chatTab.dart';
+import 'tabs/addVideoTab.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'HomePage';
@@ -14,18 +14,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String chatMessage;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 4,
+        length: 5,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: kThemeColor,
             actions: [
               Hero(
-                  tag: 'logo',
-                  child: Image(image: AssetImage('assets/mascot.png')))
+                tag: 'logo',
+                child: IconButton(
+                    icon: Image(
+                      image: AssetImage('assets/mascot.png'),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "signup");
+                    }),
+              )
             ],
             bottom: TabBar(
               labelColor: Colors.yellow,
@@ -37,6 +45,7 @@ class _HomePageState extends State<HomePage> {
               // isScrollable: true,
               tabs: [
                 Tab(icon: FaIcon(FontAwesomeIcons.facebookMessenger)),
+                Tab(icon: FaIcon(FontAwesomeIcons.broadcastTower)),
                 Tab(icon: FaIcon(FontAwesomeIcons.plusSquare)),
                 Tab(icon: FaIcon(FontAwesomeIcons.database)),
                 Tab(icon: FaIcon(FontAwesomeIcons.dochub)),
@@ -49,6 +58,15 @@ class _HomePageState extends State<HomePage> {
               /////=========================
               chatTab(),
               ////
+              Container(
+                child: Center(
+                  child: Text(
+                    "Dashboard (Announcement/Notice/Broadcast) wala Scene",
+                    style: TextStyle(fontSize: 40.0),
+                  ),
+                ),
+              ),
+              /////
               AddVideoTab(),
               ////
               ListDb(),
