@@ -4,6 +4,7 @@ import 'package:mentor_digishala/constants.dart';
 import 'package:mentor_digishala/tabs/docsUpload.dart';
 import 'package:mentor_digishala/tabs/listDb.dart';
 import 'tabs/chatTab.dart';
+import 'tabs/broadCastTab.dart';
 import 'tabs/addVideoTab.dart';
 
 class HomePage extends StatefulWidget {
@@ -59,11 +60,7 @@ class _HomePageState extends State<HomePage> {
               /////=========================
               chatTab(),
               ////
-              Container(
-                  child: Center(
-                      child: Text(
-                          "Dashboard (Announcement/Notice/Broadcast) wala Scene",
-                          style: TextStyle(fontSize: 40.0)))),
+              BroadCastTab(),
               /////
               AddVideoTab(),
               ////
