@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentor_digishala/homePage.dart';
 
@@ -10,6 +11,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  TextEditingController cPassController = TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isLoading = false;
@@ -77,6 +81,12 @@ class _SignUpPageState extends State<SignUpPage> {
         });
   }
 
+  clearFields() async {
+    cPassController.clear();
+    passController.clear();
+    usernameController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -120,6 +130,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ListTile(
                       leading: FaIcon(FontAwesomeIcons.userAlt),
                       title: TextFormField(
+                        controller: usernameController,
                         keyboardType: TextInputType.emailAddress,
                         validator: (input) {
                           if (input.isEmpty) {
@@ -141,6 +152,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ListTile(
                         leading: FaIcon(FontAwesomeIcons.lock),
                         title: TextFormField(
+                            controller: passController,
                             obscureText: true,
                             validator: (input) {
                               if (input.isEmpty) {
@@ -162,6 +174,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ListTile(
                         leading: FaIcon(FontAwesomeIcons.lock),
                         title: TextFormField(
+                            controller: cPassController,
                             obscureText: true,
                             validator: (input) {
                               if (input.isEmpty) {
@@ -198,8 +211,15 @@ class _SignUpPageState extends State<SignUpPage> {
                                         .createUserWithEmailAndPassword(
                                             email: email, password: pass);
                                     if (newUser != null) {
-                                      Navigator.pushReplacementNamed(
-                                          context, HomePage.id);
+                                      //Message after sucessfull user creation
+                                      Fluttertoast.showToast(
+                                        msg:
+                                            "${newUser.user.email}+ Added Sucesfully in database",
+                                        gravity: ToastGravity.CENTER,
+                                        backgroundColor: Colors.green,
+                                        textColor: Colors.white,
+                                      );
+                                      clearFields();
                                     }
                                   } catch (e) {
                                     setState(() {
