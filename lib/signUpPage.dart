@@ -108,12 +108,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
                           image: DecorationImage(
-                              image: AssetImage('assets/loginAsset.jpg'))),
+                              image: AssetImage('assets/reg-asset.jpg'))),
                       width: MediaQuery.of(context).size.width * 0.95,
-                      height: MediaQuery.of(context).size.width * 0.58,
+                      height: MediaQuery.of(context).size.width * 0.7,
                     ),
-
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 15.0),
                     //==========
                     //Username
                     ////========
