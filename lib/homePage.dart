@@ -60,13 +60,10 @@ class _HomePageState extends State<HomePage> {
               chatTab(),
               ////
               Container(
-                child: Center(
-                  child: Text(
-                    "Dashboard (Announcement/Notice/Broadcast) wala Scene",
-                    style: TextStyle(fontSize: 40.0),
-                  ),
-                ),
-              ),
+                  child: Center(
+                      child: Text(
+                          "Dashboard (Announcement/Notice/Broadcast) wala Scene",
+                          style: TextStyle(fontSize: 40.0)))),
               /////
               AddVideoTab(),
               ////

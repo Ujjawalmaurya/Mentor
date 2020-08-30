@@ -242,21 +242,3 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
-
-/////===========================================================================
-// signup execution
-
-// onPressed: () async {
-//                 print("${email} and ${pass}");
-
-//                 try {
-//                   final newUser = await _auth.createUserWithEmailAndPassword(
-//                       email: email, password: pass);
-//                   if (newUser != null) {
-//                     Navigator.pushNamed(context, HomePage.id);
-//                   }
-//                 } catch (e) {
-//                   print(e);
-//                 }
-//               },
-////============================================================================
