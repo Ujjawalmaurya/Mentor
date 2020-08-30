@@ -182,7 +182,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             MediaQuery.of(context).size.height * 0.02)),
                     Container(
                         height: 50.0,
-                        width: 220.0,
+                        width: 250.0,
                         /////////////////////////////////////////////////////
                         ///===========Add New Student Button======///////////
                         /////////////////////////////////////////////////////
@@ -220,7 +220,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   FontAwesomeIcons.plus,
                                   color: Colors.deepOrangeAccent,
                                 ),
-                                Text("Add New Student",
+                                Text("Add New Student ",
                                     style: TextStyle(
                                         fontSize: 20.0, color: Colors.white)),
                               ],

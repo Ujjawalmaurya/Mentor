@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               indicatorWeight: 2.5,
               // isScrollable: true,
               tabs: [
-                Tab(icon: FaIcon(FontAwesomeIcons.facebookMessenger)),
+                Tab(icon: FaIcon(Icons.chat)),
                 Tab(icon: FaIcon(FontAwesomeIcons.broadcastTower)),
                 Tab(icon: FaIcon(FontAwesomeIcons.plusSquare)),
                 Tab(icon: FaIcon(FontAwesomeIcons.database)),

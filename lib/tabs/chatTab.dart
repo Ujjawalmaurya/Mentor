@@ -138,7 +138,7 @@ class Bubble extends StatelessWidget {
         children: [
           Text(
             sender,
-            style: TextStyle(fontSize: 13.0),
+            style: TextStyle(fontSize: 11.0),
           ),
           Material(
             borderRadius: itsMeOrNot
@@ -156,7 +156,7 @@ class Bubble extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: Text(
                 '${text}',
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontSize: 18.0),
               ),
             ),
           ),
@@ -165,25 +165,3 @@ class Bubble extends StatelessWidget {
     );
   }
 }
-
-//
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         leading: null,
-//         actions: <Widget>[
-//           IconButton(
-//               icon: Icon(Icons.close),
-//               onPressed: () {
-//                 _auth.signOut();
-//                 Navigator.pop(context);
-//               }),
-//         ],
-//         title: Text('Chats'),
-//         backgroundColor: Colors.lightBlueAccent,
-//       ),
-//       body:
-//   }
-// }
