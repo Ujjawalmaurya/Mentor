@@ -100,6 +100,7 @@ class _BroadCastTabState extends State<BroadCastTab> {
                     _firestore.collection('broadcast').add({
                       'text': messageText,
                       'sender': loggedInUser.email,
+                      'time': DateTime.now().millisecondsSinceEpoch,
                     });
                   },
                   child: Text(

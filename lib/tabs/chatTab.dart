@@ -101,6 +101,7 @@ class _chatTabState extends State<chatTab> {
                     _firestore.collection('messages').add({
                       'text': messageText,
                       'sender': loggedInUser.email,
+                      'time': DateTime.now().millisecondsSinceEpoch,
                     });
                   },
                   child: Text(
