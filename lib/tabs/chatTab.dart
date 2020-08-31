@@ -42,7 +42,10 @@ class _chatTabState extends State<chatTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           StreamBuilder<QuerySnapshot>(
-            stream: _firestore.collection('messages').snapshots(),
+            stream: _firestore
+                .collection('messages')
+                .orderBy('time', descending: false)
+                .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
