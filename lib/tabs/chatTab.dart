@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_digishala/loginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -101,7 +102,7 @@ class _chatTabState extends State<chatTab> {
                     _firestore.collection('messages').add({
                       'text': messageText,
                       'sender': loggedInUser.email,
-                      'time': DateTime.now().millisecondsSinceEpoch,
+                      'time': Timestamp.now().millisecondsSinceEpoch,
                     });
                   },
                   child: Text(
