@@ -234,12 +234,13 @@ class _SignUpPageState extends State<SignUpPage> {
                             color: Colors.lightBlueAccent,
                             splashColor: Colors.deepPurpleAccent,
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 FaIcon(
                                   FontAwesomeIcons.plus,
                                   color: Colors.deepOrangeAccent,
                                 ),
+                                SizedBox(width: 8),
                                 Text("Add New Student ",
                                     style: TextStyle(
                                         fontSize: 20.0, color: Colors.white)),

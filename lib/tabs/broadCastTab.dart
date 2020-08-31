@@ -2,6 +2,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
+//https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
+// DateTime today = new DateTime.now();
+final DateTime now = DateTime.now();
+// final DateFormat formatter = DateFormat('yyyy-MM-dd');
+// final String formattedDate = formatter.format(now);
 
 class BroadCastTab extends StatefulWidget {
   @override
@@ -12,6 +19,7 @@ class _BroadCastTabState extends State<BroadCastTab> {
   final clearMessage = TextEditingController();
   final _firestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
+
   FirebaseUser loggedInUser;
   String messageText;
 
@@ -140,12 +148,14 @@ class Bubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            "-School Management",
-            style: TextStyle(fontSize: 10.0),
+            "${DateFormat().format(now)} -School Management",
+            style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
           ),
           Material(
             borderRadius: BorderRadius.circular(30.0),
             elevation: 15.0,
+            // type: MaterialType.button,
+            shadowColor: Colors.deepOrangeAccent,
             color: Colors.deepOrangeAccent,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),

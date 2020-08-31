@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:mentor_digishala/loginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
+//https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
+// DateTime today = new DateTime.now();
+final DateTime now = DateTime.now();
+// final DateFormat formatter = DateFormat('yyyy-MM-dd');
+// final String formattedDate = formatter.format(now);
 
 class chatTab extends StatefulWidget {
   @override
@@ -57,10 +64,12 @@ class _chatTabState extends State<chatTab> {
               for (var message in messages) {
                 final messageText = message.data['text'];
                 final messageSender = message.data['sender'];
+                final messageTime = message.data['time'];
                 final currentUser = loggedInUser.email;
                 final messageWidget = Bubble(
                   sender: messageSender,
                   text: messageText,
+                  time: messageTime,
                   itsMeOrNot: currentUser == messageSender,
                 );
                 messageWidgets.add(messageWidget);
@@ -127,11 +136,12 @@ class _chatTabState extends State<chatTab> {
 }
 
 class Bubble extends StatelessWidget {
-  Bubble({this.sender, this.text, this.itsMeOrNot});
+  Bubble({this.sender, this.text, this.itsMeOrNot, this.time});
 
   final String sender;
   final String text;
   final bool itsMeOrNot;
+  final int time;
 
   @override
   Widget build(BuildContext context) {
@@ -141,10 +151,7 @@ class Bubble extends StatelessWidget {
         crossAxisAlignment:
             itsMeOrNot ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          Text(
-            sender,
-            style: TextStyle(fontSize: 11.0),
-          ),
+          Text(sender, style: TextStyle(fontSize: 11.0)),
           Material(
             borderRadius: itsMeOrNot
                 ? BorderRadius.only(
@@ -155,16 +162,19 @@ class Bubble extends StatelessWidget {
                     topLeft: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0)),
-            elevation: 25.0,
-            color: itsMeOrNot ? Colors.lightBlue : Colors.white60,
+            elevation: 10.0,
+            shadowColor: itsMeOrNot ? Colors.blue : Colors.white70,
+            color: itsMeOrNot ? Colors.lightBlue : Colors.white,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Text(
-                '${text}',
-                style: TextStyle(fontSize: 18.0),
-              ),
+              child: Text('${text}',
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      color: itsMeOrNot ? Colors.white : Colors.black)),
             ),
           ),
+          Text('${DateFormat.jms().format(now)}',
+              style: TextStyle(fontSize: 9.0)),
         ],
       ),
     );
