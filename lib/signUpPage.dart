@@ -118,12 +118,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
                           image: DecorationImage(
-                              image: AssetImage('assets/loginAsset.jpg'))),
+                              image: AssetImage('assets/reg-asset.jpg'))),
                       width: MediaQuery.of(context).size.width * 0.95,
-                      height: MediaQuery.of(context).size.width * 0.58,
+                      height: MediaQuery.of(context).size.width * 0.7,
                     ),
-
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 15.0),
                     //==========
                     //Username
                     ////========
@@ -196,7 +195,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             MediaQuery.of(context).size.height * 0.02)),
                     Container(
                         height: 50.0,
-                        width: 220.0,
+                        width: 250.0,
                         /////////////////////////////////////////////////////
                         ///===========Add New Student Button======///////////
                         /////////////////////////////////////////////////////
@@ -241,7 +240,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   FontAwesomeIcons.plus,
                                   color: Colors.deepOrangeAccent,
                                 ),
-                                Text("Add New Student",
+                                Text("Add New Student ",
                                     style: TextStyle(
                                         fontSize: 20.0, color: Colors.white)),
                               ],
@@ -263,21 +262,3 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
-
-/////===========================================================================
-// signup execution
-
-// onPressed: () async {
-//                 print("${email} and ${pass}");
-
-//                 try {
-//                   final newUser = await _auth.createUserWithEmailAndPassword(
-//                       email: email, password: pass);
-//                   if (newUser != null) {
-//                     Navigator.pushNamed(context, HomePage.id);
-//                   }
-//                 } catch (e) {
-//                   print(e);
-//                 }
-//               },
-////============================================================================

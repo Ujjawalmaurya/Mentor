@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_digishala/loginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class chatTab extends StatefulWidget {
+class BroadCastTab extends StatefulWidget {
   @override
-  _chatTabState createState() => _chatTabState();
+  _BroadCastTabState createState() => _BroadCastTabState();
 }
 
-class _chatTabState extends State<chatTab> {
+class _BroadCastTabState extends State<BroadCastTab> {
   final clearMessage = TextEditingController();
   final _firestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
@@ -41,7 +40,7 @@ class _chatTabState extends State<chatTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           StreamBuilder<QuerySnapshot>(
-            stream: _firestore.collection('messages').snapshots(),
+            stream: _firestore.collection('broadcast').snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -74,7 +73,7 @@ class _chatTabState extends State<chatTab> {
           Container(
             decoration: BoxDecoration(
               border: Border(
-                top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                top: BorderSide(color: Colors.pinkAccent, width: 2.0),
               ),
             ),
             child: Row(
@@ -89,7 +88,7 @@ class _chatTabState extends State<chatTab> {
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 20.0),
-                      hintText: 'Type your message here...',
+                      hintText: 'Announce/Broadcast...',
                       border: InputBorder.none,
                     ),
                   ),
@@ -98,15 +97,15 @@ class _chatTabState extends State<chatTab> {
                   onPressed: () {
                     //send functionality
                     clearMessage.clear(); // Clears the message
-                    _firestore.collection('messages').add({
+                    _firestore.collection('broadcast').add({
                       'text': messageText,
                       'sender': loggedInUser.email,
                     });
                   },
                   child: Text(
-                    'Send',
+                    'Announce',
                     style: TextStyle(
-                      color: Colors.lightBlueAccent,
+                      color: Colors.deepPurpleAccent,
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
                     ),
@@ -131,33 +130,25 @@ class Bubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(8.0),
       child: Column(
-        crossAxisAlignment:
-            itsMeOrNot ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            sender,
-            style: TextStyle(fontSize: 11.0),
+            "-School Management",
+            style: TextStyle(fontSize: 10.0),
           ),
           Material(
-            borderRadius: itsMeOrNot
-                ? BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    bottomLeft: Radius.circular(30.0),
-                    bottomRight: Radius.circular(30.0))
-                : BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                    bottomRight: Radius.circular(30.0)),
-            elevation: 25.0,
-            color: itsMeOrNot ? Colors.lightBlue : Colors.white60,
+            borderRadius: BorderRadius.circular(30.0),
+            elevation: 15.0,
+            color: Colors.deepOrangeAccent,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Text(
-                '${text}',
-                style: TextStyle(fontSize: 18.0),
-              ),
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+              child: Text('${text}',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300)),
             ),
           ),
         ],

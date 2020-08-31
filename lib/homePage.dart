@@ -4,10 +4,12 @@ import 'package:mentor_digishala/constants.dart';
 import 'package:mentor_digishala/tabs/docsUpload.dart';
 import 'package:mentor_digishala/tabs/listDb.dart';
 import 'tabs/chatTab.dart';
+import 'tabs/broadCastTab.dart';
 import 'tabs/addVideoTab.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'HomePage';
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -44,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               indicatorWeight: 2.5,
               // isScrollable: true,
               tabs: [
-                Tab(icon: FaIcon(FontAwesomeIcons.facebookMessenger)),
+                Tab(icon: FaIcon(Icons.chat)),
                 Tab(icon: FaIcon(FontAwesomeIcons.broadcastTower)),
                 Tab(icon: FaIcon(FontAwesomeIcons.plusSquare)),
                 Tab(icon: FaIcon(FontAwesomeIcons.database)),
@@ -58,14 +60,7 @@ class _HomePageState extends State<HomePage> {
               /////=========================
               chatTab(),
               ////
-              Container(
-                child: Center(
-                  child: Text(
-                    "Dashboard (Announcement/Notice/Broadcast) wala Scene",
-                    style: TextStyle(fontSize: 40.0),
-                  ),
-                ),
-              ),
+              BroadCastTab(),
               /////
               AddVideoTab(),
               ////
