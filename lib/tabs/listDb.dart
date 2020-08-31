@@ -241,6 +241,10 @@ class _ListDbState extends State<ListDb> {
               getData();
             },
             child: Text('getData'),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            color: Colors.purple,
+            textColor: Colors.white,
           ),
           Expanded(
               child: isLoading == 'true'

@@ -99,17 +99,6 @@ class _AddVideoTabState extends State<AddVideoTab> {
     });
   }
 
-  getData() async {
-    final db =
-        FirebaseDatabase.instance.reference().child("6").child('English');
-    db.once().then((DataSnapshot snapshot) {
-      Map<dynamic, dynamic> values = snapshot.value;
-      values.forEach((key, values) {
-        print(values);
-      });
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -275,16 +264,9 @@ class _AddVideoTabState extends State<AddVideoTab> {
                           borderRadius: BorderRadius.circular(10.0)),
                       elevation: 10.0,
                       child: Text('Upload'),
-                      color: Color(0xff53E0BC),
-                      splashColor: Color(0xffFF3031C),
-                      textColor: Color(0xff4C4B4B),
+                      color: Colors.purple,
+                      textColor: Colors.white,
                     ),
-                    RaisedButton(
-                      onPressed: () {
-                        getData();
-                      },
-                      child: Text('get data'),
-                    )
                   ],
                 ),
               ),
