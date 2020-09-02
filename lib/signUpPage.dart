@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,12 +14,14 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   TextEditingController usernameController = TextEditingController();
+  TextEditingController studentClassController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController cPassController = TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isLoading = false;
   String email, pass, confPass, errorMsg;
+  String studentClass = 'empty';
 
   //Error dialogbox
   errorDialog() {
@@ -65,7 +68,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 'Error',
                 style: TextStyle(color: Colors.red),
               ),
-              content: Text('Passwords are not matching'),
+              content: Text('fill All fields coreectly'),
               actions: [
                 FlatButton(
                   color: Colors.red,
@@ -93,6 +96,29 @@ class _SignUpPageState extends State<SignUpPage> {
         name: 'Secondary', options: await FirebaseApp.instance.options);
     return FirebaseAuth.fromApp(app)
         .createUserWithEmailAndPassword(email: email, password: pass);
+  }
+
+  writeUUIdWithClass(newUser) async {
+    final dRefrence = FirebaseDatabase.instance.reference();
+    if (newUser != null) {
+      final dbReference =
+          dRefrence.child("studentClass").child(newUser.user.uid);
+      await dbReference.set({
+        "class": studentClass,
+        "userid": newUser.user.email,
+      }).catchError((e) {
+        print(e.toString());
+      }).whenComplete(() => clearFields());
+    } else {
+      Fluttertoast.showToast(
+          msg: "Oops",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
   }
 
   @override
@@ -198,6 +224,36 @@ class _SignUpPageState extends State<SignUpPage> {
                               });
                               print(this.confPass);
                             })),
+                    ListTile(
+                      leading: FaIcon(FontAwesomeIcons.sortNumericDown),
+                      title: Text('Select Class'),
+                      trailing: DropdownButton<String>(
+                        icon: Icon(Icons.arrow_drop_down),
+                        value: (this.studentClass == 'empty')
+                            ? null
+                            : this.studentClass,
+                        hint: Text('Select class'),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            studentClass = newValue;
+                          });
+                        },
+                        items: <String>['6', '7', '8', '9', '10']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                     Padding(
                         padding: EdgeInsets.all(
                             MediaQuery.of(context).size.height * 0.02)),
@@ -212,10 +268,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               // print("email: ${email} and pass: ${pass}");
                               if (_key.currentState.validate()) {
                                 _key.currentState.save();
-                                if (pass == confPass) {
+                                if (pass == confPass &&
+                                    studentClass != 'empty') {
                                   try {
                                     final newUser = await register();
                                     if (newUser != null) {
+                                      writeUUIdWithClass(newUser);
                                       //Message after sucessfull user creation
                                       Fluttertoast.showToast(
                                         msg:
