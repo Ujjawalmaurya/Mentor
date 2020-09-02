@@ -12,6 +12,8 @@ final DateTime now = DateTime.now();
 // final String formattedDate = formatter.format(now);
 
 class chatTab extends StatefulWidget {
+  final String studentClass;
+  chatTab({Key key, @required this.studentClass}) : super(key: key);
   @override
   _chatTabState createState() => _chatTabState();
 }
@@ -43,93 +45,98 @@ class _chatTabState extends State<chatTab> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          StreamBuilder<QuerySnapshot>(
-            stream: _firestore
-                .collection('messages')
-                .orderBy('time', descending: false)
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Center(
-                    child: CircularProgressIndicator(
-                        backgroundColor: Colors.yellowAccent));
-              }
-              final messages = snapshot.data.documents.reversed;
-              List<Bubble> messageWidgets = [];
-              for (var message in messages) {
-                final messageText = message.data['text'];
-                final messageSender = message.data['sender'];
-                final messageTime = message.data['time'];
-                final currentUser = loggedInUser.email;
-                final messageWidget = Bubble(
-                  sender: messageSender,
-                  text: messageText,
-                  time: messageTime,
-                  itsMeOrNot: currentUser == messageSender,
+    return Scaffold(
+      // appBar: AppBar(
+
+      // ),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+              stream: _firestore
+                  .collection(widget.studentClass)
+                  .orderBy('time', descending: false)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                      child: CircularProgressIndicator(
+                          backgroundColor: Colors.yellowAccent));
+                }
+                final messages = snapshot.data.documents.reversed;
+                List<Bubble> messageWidgets = [];
+                for (var message in messages) {
+                  final messageText = message.data['text'];
+                  final messageSender = message.data['sender'];
+                  final messageTime = message.data['time'];
+                  final currentUser = loggedInUser.email;
+                  final messageWidget = Bubble(
+                    sender: messageSender,
+                    text: messageText,
+                    time: messageTime,
+                    itsMeOrNot: currentUser == messageSender,
+                  );
+                  messageWidgets.add(messageWidget);
+                }
+                return Expanded(
+                  child: ListView(
+                    reverse: true,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                    children: messageWidgets,
+                  ),
                 );
-                messageWidgets.add(messageWidget);
-              }
-              return Expanded(
-                child: ListView(
-                  reverse: true,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-                  children: messageWidgets,
+              },
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
                 ),
-              );
-            },
-          ),
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: TextField(
+                      controller: clearMessage,
+                      onChanged: (value) {
+                        messageText = value;
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
+                        hintText: 'Type your message here...',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      //send functionality
+                      clearMessage.clear(); // Clears the message
+                      _firestore.collection(widget.studentClass).add({
+                        'text': messageText,
+                        'sender': loggedInUser.email,
+                        'time': Timestamp.now().millisecondsSinceEpoch,
+                      });
+                    },
+                    child: Text(
+                      'Send',
+                      style: TextStyle(
+                        color: Colors.lightBlueAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: TextField(
-                    controller: clearMessage,
-                    onChanged: (value) {
-                      messageText = value;
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 20.0),
-                      hintText: 'Type your message here...',
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-                FlatButton(
-                  onPressed: () {
-                    //send functionality
-                    clearMessage.clear(); // Clears the message
-                    _firestore.collection('messages').add({
-                      'text': messageText,
-                      'sender': loggedInUser.email,
-                      'time': Timestamp.now().millisecondsSinceEpoch,
-                    });
-                  },
-                  child: Text(
-                    'Send',
-                    style: TextStyle(
-                      color: Colors.lightBlueAccent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

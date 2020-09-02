@@ -7,6 +7,7 @@ import 'tabs/chatTab.dart';
 import 'tabs/broadCastTab.dart';
 import 'tabs/addVideoTab.dart';
 import 'tabs/classChangeTab.dart';
+import 'tabs/chatGroupList.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'HomePage';
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
           body: TabBarView(
             children: [
               /////=========================
-              chatTab(),
+              ChatGroupList(),
               ////
               BroadCastTab(),
               /////
