@@ -30,11 +30,14 @@ class _DocsUploadState extends State<DocsUpload> {
   String pathSelectedSubject = 'empty';
   Map datakey = new Map();
   Map snapShotdata = new Map();
+  String title = 'empty';
 
   TextEditingController filenameController = TextEditingController();
 
   docSelecter() async {
-    if (selectedClass != 'empty' && selectedSubject != 'empty') {
+    if (selectedClass != 'empty' &&
+        selectedSubject != 'empty' &&
+        title != 'empty') {
       try {
         final file = await FilePicker.getFile(
           type: FileType.custom,
@@ -99,6 +102,7 @@ class _DocsUploadState extends State<DocsUpload> {
     await dbReference.push().set({
       "url": url,
       "filename": filename,
+      "title": title,
     }).catchError((e) {
       print(e.toString());
     }).whenComplete(() {
@@ -306,7 +310,7 @@ class _DocsUploadState extends State<DocsUpload> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    filename = value;
+                    title = value;
                   });
                 },
                 decoration: InputDecoration(
@@ -340,7 +344,7 @@ class _DocsUploadState extends State<DocsUpload> {
             DialogButton(
               color: Colors.white,
               onPressed: () {
-                if (filename != 'empty') {
+                if (title != 'empty') {
                   Navigator.of(context, rootNavigator: true).pop();
                   docSelecter();
                 } else {
@@ -512,6 +516,7 @@ class _DocsUploadState extends State<DocsUpload> {
                                   onTap: () {
                                     launchUrl(snapShotdata[index]['url']);
                                   },
+                                  subtitle: Text(snapShotdata[index]['title']),
                                 );
                               },
                             ))
