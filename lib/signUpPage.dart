@@ -102,10 +102,11 @@ class _SignUpPageState extends State<SignUpPage> {
     final dRefrence = FirebaseDatabase.instance.reference();
     if (newUser != null) {
       final dbReference =
-          dRefrence.child("studentClass").child(newUser.user.uid);
+          dRefrence.child("studentInfos").child(newUser.user.uid);
       await dbReference.set({
         "class": studentClass,
-        "userid": newUser.user.email,
+        "userEmail": newUser.user.email,
+        "userUid": newUser.user.uid,
       }).catchError((e) {
         print(e.toString());
       }).whenComplete(() => clearFields());

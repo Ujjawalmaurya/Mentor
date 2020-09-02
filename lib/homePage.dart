@@ -6,6 +6,7 @@ import 'package:mentor_digishala/tabs/listDb.dart';
 import 'tabs/chatTab.dart';
 import 'tabs/broadCastTab.dart';
 import 'tabs/addVideoTab.dart';
+import 'tabs/classChangeTab.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'HomePage';
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       home: DefaultTabController(
         initialIndex: 2,
-        length: 5,
+        length: 6,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: kThemeColor,
@@ -52,6 +53,7 @@ class _HomePageState extends State<HomePage> {
                 Tab(icon: FaIcon(FontAwesomeIcons.plusSquare)),
                 Tab(icon: FaIcon(FontAwesomeIcons.database)),
                 Tab(icon: FaIcon(FontAwesomeIcons.dochub)),
+                Tab(icon: FaIcon(FontAwesomeIcons.calendarAlt)),
               ],
             ),
             title: Text('Mentor -DigiShala'),
@@ -68,6 +70,8 @@ class _HomePageState extends State<HomePage> {
               ListDb(),
               ////
               DocsUpload(),
+
+              ClassChangeTab(),
             ], ////===================================
           ),
         ),
