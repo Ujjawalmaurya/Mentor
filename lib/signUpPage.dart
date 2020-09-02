@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -85,6 +86,13 @@ class _SignUpPageState extends State<SignUpPage> {
     cPassController.clear();
     passController.clear();
     usernameController.clear();
+  }
+
+  register() async {
+    FirebaseApp app = await FirebaseApp.configure(
+        name: 'Secondary', options: await FirebaseApp.instance.options);
+    return FirebaseAuth.fromApp(app)
+        .createUserWithEmailAndPassword(email: email, password: pass);
   }
 
   @override
@@ -206,9 +214,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 _key.currentState.save();
                                 if (pass == confPass) {
                                   try {
-                                    final newUser = await _auth
-                                        .createUserWithEmailAndPassword(
-                                            email: email, password: pass);
+                                    final newUser = await register();
                                     if (newUser != null) {
                                       //Message after sucessfull user creation
                                       Fluttertoast.showToast(
