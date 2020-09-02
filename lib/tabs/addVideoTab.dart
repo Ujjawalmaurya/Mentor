@@ -171,7 +171,8 @@ class _AddVideoTabState extends State<AddVideoTab> {
         : SingleChildScrollView(
             child: SafeArea(
             child: Container(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                  top: 20.0, bottom: 20.0, left: 10.0, right: 10.0),
               height: MediaQuery.of(context).size.height * 1,
               width: MediaQuery.of(context).size.width * 1,
               alignment: Alignment.topCenter,

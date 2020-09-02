@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ///Password
                     ////==============
                     ListTile(
-                        leading: FaIcon(FontAwesomeIcons.lock),
+                        leading: FaIcon(FontAwesomeIcons.keycdn),
                         title: TextFormField(
                             obscureText: true,
                             validator: (input) {

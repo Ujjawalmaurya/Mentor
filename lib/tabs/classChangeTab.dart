@@ -2,9 +2,11 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mentor_digishala/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ClassChangeTab extends StatefulWidget {
+  static const String id = "ChangeClassTab";
   @override
   _ClassChangeTabState createState() => _ClassChangeTabState();
 }
@@ -129,7 +131,7 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
         ? Container(
             child: Center(
               child: CircularProgressIndicator(
-                backgroundColor: Colors.purple,
+                backgroundColor: kThemeColor,
               ),
             ),
           )

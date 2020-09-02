@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -154,7 +155,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           borderRadius: BorderRadius.circular(20.0),
                           image: DecorationImage(
                               image: AssetImage('assets/reg-asset.jpg'))),
-                      width: MediaQuery.of(context).size.width * 0.95,
+                      width: MediaQuery.of(context).size.width * 0.9,
                       height: MediaQuery.of(context).size.width * 0.7,
                     ),
                     SizedBox(height: 15.0),
@@ -162,7 +163,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     //Username
                     ////========
                     ListTile(
-                      leading: FaIcon(FontAwesomeIcons.userAlt),
+                      leading: FaIcon(
+                        FontAwesomeIcons.userAlt,
+                        color: kThemeColor,
+                      ),
                       title: TextFormField(
                         controller: usernameController,
                         keyboardType: TextInputType.emailAddress,
@@ -184,7 +188,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     ///Password
                     ////==============
                     ListTile(
-                        leading: FaIcon(FontAwesomeIcons.lock),
+                        leading: FaIcon(
+                          FontAwesomeIcons.userLock,
+                          color: kThemeColor,
+                        ),
                         title: TextFormField(
                             controller: passController,
                             obscureText: true,
@@ -206,7 +213,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     ///Confirm Password
                     ////===============
                     ListTile(
-                        leading: FaIcon(FontAwesomeIcons.lock),
+                        leading: FaIcon(
+                          FontAwesomeIcons.userLock,
+                          color: kThemeColor,
+                        ),
                         title: TextFormField(
                             controller: cPassController,
                             obscureText: true,
@@ -226,7 +236,10 @@ class _SignUpPageState extends State<SignUpPage> {
                               print(this.confPass);
                             })),
                     ListTile(
-                      leading: FaIcon(FontAwesomeIcons.sortNumericDown),
+                      leading: FaIcon(
+                        FontAwesomeIcons.sortNumericDown,
+                        color: kThemeColor,
+                      ),
                       title: Text('Select Class'),
                       trailing: DropdownButton<String>(
                         icon: Icon(Icons.arrow_drop_down),
@@ -236,7 +249,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         hint: Text('Select class'),
                         iconSize: 24,
                         elevation: 16,
-                        style: TextStyle(color: Colors.deepPurple),
+                        style: TextStyle(color: kThemeColor),
                         underline: Container(
                           height: 2,
                           color: Colors.deepPurpleAccent,
