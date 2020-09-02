@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -97,6 +98,60 @@ class _AddVideoTabState extends State<AddVideoTab> {
     setState(() {
       isUploading = false;
     });
+  }
+
+  titleChanger() {
+    Alert(
+        style: AlertStyle(isCloseButton: false),
+        context: context,
+        title: "Edit title",
+        content: Column(
+          children: <Widget>[
+            ListTile(
+              title: TextFormField(
+                initialValue: title,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "Field is required";
+                  }
+                },
+                onChanged: (value) {
+                  setState(() {
+                    title = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  focusColor: Colors.blueGrey,
+                  hoverColor: Colors.purple,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop();
+            },
+            child: Text(
+              "Ok",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]).show();
   }
 
   @override
@@ -244,8 +299,16 @@ class _AddVideoTabState extends State<AddVideoTab> {
                                 color: Colors.purple,
                                 fontSize: 18),
                           ),
-                          Text(
-                            this.title == null ? ('null..') : (this.title),
+                          ListTile(
+                            title: Text(
+                              this.title == null ? ('null..') : (this.title),
+                            ),
+                            trailing: GestureDetector(
+                              child: FaIcon(FontAwesomeIcons.edit),
+                              onTap: () {
+                                titleChanger();
+                              },
+                            ),
                           )
                         ],
                       ),

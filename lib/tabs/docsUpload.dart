@@ -8,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DocsUpload extends StatefulWidget {
@@ -29,6 +30,8 @@ class _DocsUploadState extends State<DocsUpload> {
   String pathSelectedSubject = 'empty';
   Map datakey = new Map();
   Map snapShotdata = new Map();
+
+  TextEditingController filenameController = TextEditingController();
 
   docSelecter() async {
     if (selectedClass != 'empty' && selectedSubject != 'empty') {
@@ -283,6 +286,98 @@ class _DocsUploadState extends State<DocsUpload> {
     }
   }
 
+  docTitleGetter(context) {
+    if (selectedClass != 'empty' && selectedSubject != 'empty') {
+      Alert(
+          style: AlertStyle(
+              isCloseButton: false,
+              alertBorder: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0))),
+          context: context,
+          title: "Enter doc title",
+          content: Column(
+            children: <Widget>[
+              TextFormField(
+                controller: filenameController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "Field is required";
+                  }
+                },
+                onChanged: (value) {
+                  setState(() {
+                    filename = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  hintText: 'Enter title here',
+                  icon:
+                      //  FaIcon(FontAwesomeIcons.link),
+                      Icon(
+                    Icons.line_style,
+                    color: Colors.purple,
+                  ),
+                  focusColor: Colors.blueGrey,
+                  hoverColor: Colors.purple,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          buttons: [
+            DialogButton(
+              color: Colors.white,
+              onPressed: () {
+                if (filename != 'empty') {
+                  Navigator.of(context, rootNavigator: true).pop();
+                  docSelecter();
+                } else {
+                  Fluttertoast.showToast(
+                    msg: 'Enter title',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                  );
+                }
+              },
+              child: Text(
+                "Ok",
+                style: TextStyle(color: Colors.green, fontSize: 20),
+              ),
+            ),
+            DialogButton(
+              color: Colors.white,
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
+              child: Text(
+                "Cancel",
+                style: TextStyle(color: Colors.red, fontSize: 20),
+              ),
+            )
+          ]).show();
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Select all fields first',
+        toastLength: Toast.LENGTH_SHORT,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return isLoading == 'true'
@@ -388,7 +483,7 @@ class _DocsUploadState extends State<DocsUpload> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)),
                         onPressed: () {
-                          docSelecter();
+                          docTitleGetter(context);
                         },
                         color: Colors.purple,
                         child: Text(
