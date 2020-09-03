@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:mentor_digishala/constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:file_picker/file_picker.dart';
@@ -41,7 +42,13 @@ class _DocsUploadState extends State<DocsUpload> {
       try {
         final file = await FilePicker.getFile(
           type: FileType.custom,
-          allowedExtensions: ['png', 'jpeg', 'pdf', 'doc', 'txt'],
+          allowedExtensions: [
+            'png',
+            'jpeg',
+            'pdf',
+            'doc',
+            'txt',
+          ],
         );
         setState(() {
           filename = p.basename(file.path);
@@ -56,7 +63,7 @@ class _DocsUploadState extends State<DocsUpload> {
       }
     } else {
       Fluttertoast.showToast(
-        msg: 'select all Fields',
+        msg: 'Select all Fields',
         backgroundColor: Colors.red,
         textColor: Colors.white,
       );
@@ -77,7 +84,7 @@ class _DocsUploadState extends State<DocsUpload> {
       final StorageTaskSnapshot downloadUrl =
           (await uploadTask.onComplete.whenComplete(() {
         Fluttertoast.showToast(
-          msg: 'Sucess',
+          msg: 'Success',
           backgroundColor: Colors.green,
           textColor: Colors.white,
         );
@@ -111,7 +118,7 @@ class _DocsUploadState extends State<DocsUpload> {
         isLoading = 'false';
       });
       Fluttertoast.showToast(
-        msg: 'Database_Updated',
+        msg: 'Database Updated',
         backgroundColor: Colors.green,
         textColor: Colors.white,
       );
@@ -150,7 +157,7 @@ class _DocsUploadState extends State<DocsUpload> {
             isLoading = 'false';
           });
           Fluttertoast.showToast(
-              msg: 'No Document uploaded in this section',
+              msg: 'No Documents uploaded',
               gravity: ToastGravity.BOTTOM,
               backgroundColor: Colors.red,
               toastLength: Toast.LENGTH_LONG);
@@ -191,7 +198,7 @@ class _DocsUploadState extends State<DocsUpload> {
     FirebaseStorage.instance.getReferenceFromUrl(url).then((res) {
       res.delete().then((res) {
         Fluttertoast.showToast(
-            msg: 'Deleted From Database',
+            msg: 'Deleted',
             backgroundColor: Colors.green,
             textColor: Colors.white);
       });
@@ -211,7 +218,7 @@ class _DocsUploadState extends State<DocsUpload> {
             'Alert',
             style: TextStyle(color: Colors.red),
           ),
-          content: Text('this action will delete this link'),
+          content: Text('This action will delete selected Document'),
           actions: [
             FlatButton(
               color: Colors.red,
@@ -263,7 +270,7 @@ class _DocsUploadState extends State<DocsUpload> {
           isLoading = 'false';
         });
         Fluttertoast.showToast(
-            msg: 'All videos are removed',
+            msg: 'All documents are removed',
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.red,
             toastLength: Toast.LENGTH_LONG);
@@ -298,7 +305,7 @@ class _DocsUploadState extends State<DocsUpload> {
               alertBorder: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0))),
           context: context,
-          title: "Enter doc title",
+          title: "Enter Document title",
           content: Column(
             children: <Widget>[
               TextFormField(
@@ -314,15 +321,10 @@ class _DocsUploadState extends State<DocsUpload> {
                   });
                 },
                 decoration: InputDecoration(
-                  hintText: 'Enter title here',
-                  icon:
-                      //  FaIcon(FontAwesomeIcons.link),
-                      Icon(
-                    Icons.line_style,
-                    color: Colors.purple,
-                  ),
+                  hintText: 'Title here',
+                  icon: FaIcon(FontAwesomeIcons.link, color: kThemeColor),
                   focusColor: Colors.blueGrey,
-                  hoverColor: Colors.purple,
+                  hoverColor: kThemeColor,
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),
                     borderSide: BorderSide(
@@ -417,8 +419,18 @@ class _DocsUploadState extends State<DocsUpload> {
                           selectedClass = newValue;
                         });
                       },
-                      items: <String>['6', '7', '8', '9', '10']
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: <String>[
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                        '5',
+                        '6',
+                        '7',
+                        '8',
+                        '9',
+                        '10'
+                      ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -447,14 +459,17 @@ class _DocsUploadState extends State<DocsUpload> {
                         });
                       },
                       items: <String>[
+                        'Hindi',
                         'English',
+                        'Maths',
+                        'Computer',
                         'Geography',
                         'History',
                         'Civics',
                         'Economics',
                         'Physics',
                         'Chemistry',
-                        'Biology'
+                        'Biology',
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -463,39 +478,41 @@ class _DocsUploadState extends State<DocsUpload> {
                       }).toList(),
                     ),
                   ),
-                  Divider(
-                    height: MediaQuery.of(context).size.height / 10,
-                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  // Divider(height: MediaQuery.of(context).size.height / 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       RaisedButton(
-                        elevation: 20.0,
+                        elevation: 15.0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)),
                         onPressed: () {
                           getFireStoreData();
                         },
-                        color: Colors.purple,
+                        color: kThemeColor,
                         child: Text(
-                          'getData',
-                          style: TextStyle(color: Colors.white),
+                          'Fetch Documents',
+                          style: TextStyle(color: Colors.white, fontSize: 16.0),
                         ),
                       ),
                       RaisedButton(
-                        elevation: 20.0,
+                        elevation: 15.0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)),
                         onPressed: () {
                           docTitleGetter(context);
                         },
-                        color: Colors.purple,
+                        color: kThemeColor,
                         child: Text(
-                          'Select And Upload Doc',
-                          style: TextStyle(color: Colors.white),
+                          'Upload Document',
+                          style: TextStyle(color: Colors.white, fontSize: 16.0),
                         ),
                       ),
                     ],
+                  ),
+                  Divider(
+                    height: MediaQuery.of(context).size.height / 20,
                   ),
                   Expanded(
                       child: getData == 'true'
@@ -504,7 +521,8 @@ class _DocsUploadState extends State<DocsUpload> {
                               itemCount: datakey.length,
                               itemBuilder: (context, index) {
                                 return ListTile(
-                                  leading: Icon(Icons.date_range),
+                                  leading: Icon(FontAwesomeIcons.dochub,
+                                      color: kThemeColor),
                                   title: Text(snapShotdata[index]['filename']),
                                   onLongPress: () {
                                     deleteCnfmBox(

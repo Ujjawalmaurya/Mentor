@@ -63,11 +63,12 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
     Alert(
         style: AlertStyle(isCloseButton: false),
         context: context,
-        title: "Select class",
+        title: "Change Class",
         content: Column(
           children: <Widget>[
             ListTile(
-              leading: FaIcon(FontAwesomeIcons.sortNumericDown),
+              leading:
+                  FaIcon(FontAwesomeIcons.sortNumericDown, color: kThemeColor),
               title: Text('Select Class'),
               trailing: DropdownButton<String>(
                 icon: Icon(Icons.arrow_drop_down),
@@ -83,8 +84,18 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
                     studentClass = newValue;
                   });
                 },
-                items: <String>['6', '7', '8', '9', '10']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: <String>[
+                  '1',
+                  '2',
+                  '3',
+                  '4',
+                  '5',
+                  '6',
+                  '7',
+                  '8',
+                  '9',
+                  '10'
+                ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -140,11 +151,21 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
               itemCount: datakey.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(snapShotdata[index]['userEmail']),
+                  title: Text(
+                    snapShotdata[index]['userEmail'],
+                    style: TextStyle(fontSize: 18.0),
+                  ),
                   onTap: () {
                     popClassSelctor(context, snapShotdata[index]["userUid"]);
                   },
-                  trailing: Text(snapShotdata[index]['class']),
+                  trailing: Text(
+                    snapShotdata[index]['class'],
+                    style: TextStyle(color: kThemeColor, fontSize: 20.0),
+                  ),
+                  leading: FaIcon(
+                    FontAwesomeIcons.userGraduate,
+                    color: kThemeColor,
+                  ),
                 );
               },
             ),

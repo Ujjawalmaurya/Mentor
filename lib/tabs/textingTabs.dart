@@ -44,19 +44,19 @@ class _TextingTabsState extends State<TextingTabs> {
                 tabBackgroundColor: Colors.pinkAccent,
                 tabs: [
                   GButton(
-                    icon: Icons.chat_bubble,
+                    icon: FontAwesomeIcons.solidComments,
                     text: 'Chats and Discussions',
                     textStyle: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w300,
                         color: Colors.white),
                   ),
                   GButton(
-                    icon: FontAwesomeIcons.broadcastTower,
+                    icon: FontAwesomeIcons.bullhorn,
                     text: 'Broadcast/Announce',
                     textStyle: TextStyle(
                         fontSize: 18.0,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w300,
                         color: Colors.white),
                   ),
                 ],

@@ -4,6 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mentor_digishala/constants.dart';
 
 class ListDb extends StatefulWidget {
   @override
@@ -95,7 +97,7 @@ class _ListDbState extends State<ListDb> {
             'Alert',
             style: TextStyle(color: Colors.red),
           ),
-          content: Text('this action will delete this link'),
+          content: Text('This action will delete selected Video'),
           actions: [
             FlatButton(
               color: Colors.red,
@@ -190,7 +192,7 @@ class _ListDbState extends State<ListDb> {
                   selectedClass = newValue;
                 });
               },
-              items: <String>['6', '7', '8', '9', '10']
+              items: <String>['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -220,7 +222,10 @@ class _ListDbState extends State<ListDb> {
                 });
               },
               items: <String>[
+                'Hindi',
                 'English',
+                'Maths',
+                'Computer',
                 'Geography',
                 'History',
                 'Civics',
@@ -236,30 +241,39 @@ class _ListDbState extends State<ListDb> {
               }).toList(),
             ),
           ),
-          RaisedButton(
-            onPressed: () {
-              getData();
-            },
-            child: Text('getData'),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
-            color: Colors.purple,
-            textColor: Colors.white,
+          Container(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: RaisedButton(
+              elevation: 15,
+              onPressed: () {
+                getData();
+              },
+              child:
+                  Text('Fetch Video Details', style: TextStyle(fontSize: 20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+              color: kThemeColor,
+              textColor: Colors.white,
+            ),
           ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          Divider(),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
           Expanded(
               child: isLoading == 'true'
                   ? Container(
                       alignment: Alignment.center,
                       height: MediaQuery.of(context).size.height / 10,
                       child: CircularProgressIndicator(
-                        backgroundColor: Colors.deepPurple,
+                        backgroundColor: kThemeColor,
                       ),
                     )
                   : ListView.builder(
                       itemCount: datakey.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          leading: Icon(Icons.date_range),
+                          leading: Icon(FontAwesomeIcons.solidFileVideo,
+                              color: kThemeColor),
                           title: Text(snapShotdata[index]['title']),
                           onLongPress: () {
                             deleteCnfmBox(datakey[index], index);

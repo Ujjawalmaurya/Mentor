@@ -122,7 +122,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
                 },
                 decoration: InputDecoration(
                   focusColor: Colors.blueGrey,
-                  hoverColor: Colors.purple,
+                  hoverColor: kThemeColor,
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),
                     borderSide: BorderSide(
@@ -185,7 +185,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
                       controller: linkc,
                       validator: (value) {
                         if (value.isEmpty) {
-                          return "Field is required";
+                          return "Video link is required";
                         }
                       },
                       onChanged: (value) {
@@ -195,13 +195,12 @@ class _AddVideoTabState extends State<AddVideoTab> {
                         fetchUrl();
                       },
                       decoration: InputDecoration(
-                        hintText: 'Paste link Here',
-                        icon:
-                            //  FaIcon(FontAwesomeIcons.link),
-                            Icon(
-                          Icons.line_style,
-                          color: Colors.purple,
-                        ),
+                        hintText: 'Paste Video Link Here',
+                        icon: FaIcon(FontAwesomeIcons.link, color: kThemeColor),
+                        //   Icon(
+                        // Icons.line_style,
+                        // color: Colors.purple,
+                        // ),
                         focusColor: Colors.blueGrey,
                         hoverColor: Colors.purple,
                         focusedBorder: OutlineInputBorder(
@@ -232,7 +231,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
                         hint: Text('Select class'),
                         iconSize: 24,
                         elevation: 16,
-                        style: TextStyle(color: Colors.deepPurple),
+                        style: TextStyle(color: kThemeColor),
                         underline: Container(
                           height: 2,
                           color: Colors.deepPurpleAccent,
@@ -242,8 +241,18 @@ class _AddVideoTabState extends State<AddVideoTab> {
                             selectedClass = newValue;
                           });
                         },
-                        items: <String>['6', '7', '8', '9', '10']
-                            .map<DropdownMenuItem<String>>((String value) {
+                        items: <String>[
+                          '1',
+                          '2',
+                          '3',
+                          '4',
+                          '5',
+                          '6',
+                          '7',
+                          '8',
+                          '9',
+                          '10'
+                        ].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
@@ -272,7 +281,10 @@ class _AddVideoTabState extends State<AddVideoTab> {
                           });
                         },
                         items: <String>[
+                          'Hindi',
                           'English',
+                          'Maths',
+                          'Computer',
                           'Geography',
                           'History',
                           'Civics',
@@ -317,19 +329,25 @@ class _AddVideoTabState extends State<AddVideoTab> {
                     Divider(
                       height: MediaQuery.of(context).size.height * 0.05,
                     ),
-                    RaisedButton(
-                      onPressed: () {
-                        if (_key.currentState.validate()) {
-                          _key.currentState.save();
-                          uploadVideoLink();
-                        }
-                      },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
-                      elevation: 10.0,
-                      child: Text('Upload'),
-                      color: Colors.purple,
-                      textColor: Colors.white,
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: RaisedButton(
+                        onPressed: () {
+                          if (_key.currentState.validate()) {
+                            _key.currentState.save();
+                            uploadVideoLink();
+                          }
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        elevation: 15.0,
+                        child: Text(
+                          'Upload Video',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        color: kThemeColor,
+                        textColor: Colors.white,
+                      ),
                     ),
                   ],
                 ),

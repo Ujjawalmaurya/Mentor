@@ -21,3 +21,15 @@ const kSendButtonTextStyle = TextStyle(
     color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 18.0);
 
 //======================================================================================
+
+//                           'Hindi',
+//                           'English',
+//                           'Maths'
+//                           'Computer'
+//                           'Geography',
+//                           'History',
+//                           'Civics',
+//                           'Economics',
+//                           'Physics',
+//                           'Chemistry',
+//                           'Biology',
