@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_digishala/constants.dart';
 // import 'package:mentor_digishala/constants.dart';
 import 'package:mentor_digishala/homePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -109,7 +110,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     //Username
                     ////========
                     ListTile(
-                      leading: FaIcon(FontAwesomeIcons.userAlt),
+                      leading:
+                          FaIcon(FontAwesomeIcons.userAlt, color: kThemeColor),
                       title: TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         validator: (input) {
@@ -130,7 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ///Password
                     ////==============
                     ListTile(
-                        leading: FaIcon(FontAwesomeIcons.keycdn),
+                        leading:
+                            FaIcon(FontAwesomeIcons.keycdn, color: kThemeColor),
                         title: TextFormField(
                             obscureText: true,
                             validator: (input) {
@@ -167,9 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             splashColor: Colors.deepPurpleAccent,
                             child: Text("Get in",
                                 style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: Colors.white,
-                                    fontFamily: 'Pacifico')),
+                                    fontSize: 20.0, color: Colors.white)),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25.0)))),
                     Padding(

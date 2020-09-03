@@ -155,8 +155,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           borderRadius: BorderRadius.circular(20.0),
                           image: DecorationImage(
                               image: AssetImage('assets/reg-asset.jpg'))),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.width * 0.7,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: MediaQuery.of(context).size.width * 0.6,
                     ),
                     SizedBox(height: 15.0),
                     //==========
