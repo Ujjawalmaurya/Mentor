@@ -68,9 +68,9 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   gap: 15,
                   activeColor: Colors.white,
-                  iconSize: 27,
+                  iconSize: 25,
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                  duration: Duration(milliseconds: 900),
+                  duration: Duration(milliseconds: 800),
                   tabBackgroundColor: kThemeColor,
                   tabs: [
                     GButton(

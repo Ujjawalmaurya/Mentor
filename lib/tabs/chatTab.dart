@@ -5,12 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
-//https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
-// DateTime today = new DateTime.now();
-final DateTime now = DateTime.now();
-// final DateFormat formatter = DateFormat('yyyy-MM-dd');
-// final String formattedDate = formatter.format(now);
-
 class chatTab extends StatefulWidget {
   final String studentClass;
   chatTab({Key key, @required this.studentClass}) : super(key: key);
@@ -46,9 +40,7 @@ class _chatTabState extends State<chatTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-
-      // ),
+      // appBar: AppBar(),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,11 +63,15 @@ class _chatTabState extends State<chatTab> {
                   final messageText = message.data['text'];
                   final messageSender = message.data['sender'];
                   final messageTime = message.data['time'];
+                  final timeOfMsg = message.data['timeOfMsg'];
+                  final dateOfMsg = message.data['dateOfMsg'];
                   final currentUser = loggedInUser.email;
                   final messageWidget = Bubble(
                     sender: messageSender,
                     text: messageText,
                     time: messageTime,
+                    timeOfMsg: timeOfMsg,
+                    dateOfMsg: dateOfMsg,
                     itsMeOrNot: currentUser == messageSender,
                   );
                   messageWidgets.add(messageWidget);
@@ -116,11 +112,16 @@ class _chatTabState extends State<chatTab> {
                   FlatButton(
                     onPressed: () {
                       //send functionality
+                      final DateTime now = DateTime
+                          .now(); //https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
+
                       clearMessage.clear(); // Clears the message
                       _firestore.collection(widget.studentClass).add({
                         'text': messageText,
                         'sender': loggedInUser.email,
                         'time': Timestamp.now().millisecondsSinceEpoch,
+                        'timeOfMsg': DateFormat.jms().format(now),
+                        'dateOfMsg': DateFormat.yMMMMd().format(now),
                       });
                     },
                     child: Text(
@@ -143,10 +144,18 @@ class _chatTabState extends State<chatTab> {
 }
 
 class Bubble extends StatelessWidget {
-  Bubble({this.sender, this.text, this.itsMeOrNot, this.time});
+  Bubble(
+      {this.sender,
+      this.text,
+      this.itsMeOrNot,
+      this.time,
+      this.timeOfMsg,
+      this.dateOfMsg});
 
   final String sender;
   final String text;
+  final String timeOfMsg;
+  final String dateOfMsg;
   final bool itsMeOrNot;
   final int time;
 
@@ -158,7 +167,7 @@ class Bubble extends StatelessWidget {
         crossAxisAlignment:
             itsMeOrNot ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          Text(sender, style: TextStyle(fontSize: 11.0)),
+          Text(sender, style: TextStyle(fontSize: 13.0)),
           Material(
             borderRadius: itsMeOrNot
                 ? BorderRadius.only(
@@ -176,12 +185,12 @@ class Bubble extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: Text('${text}',
                   style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 18.0,
                       color: itsMeOrNot ? Colors.white : Colors.black)),
             ),
           ),
-          Text('${DateFormat.jms().format(now)}',
-              style: TextStyle(fontSize: 9.0)),
+          Text(timeOfMsg.toString(), style: TextStyle(fontSize: 10.0)),
+          Text(dateOfMsg.toString(), style: TextStyle(fontSize: 8.0)),
         ],
       ),
     );

@@ -72,35 +72,3 @@ class _TextingTabsState extends State<TextingTabs> {
     );
   }
 }
-
-// MaterialApp(
-//       home: DefaultTabController(
-//         initialIndex: 0,
-//         length: 2,
-//         child: Scaffold(
-//           appBar: AppBar(
-//             backgroundColor: kThemeColor,
-//             bottom: TabBar(
-//               labelColor: Colors.yellow,
-//               unselectedLabelColor: Colors.blue,
-//               indicatorSize: TabBarIndicatorSize.tab,
-//               indicatorPadding: EdgeInsets.all(5.0),
-//               indicatorColor: Colors.redAccent,
-//               indicatorWeight: 3.5,
-//               // isScrollable: true,
-//               tabs: [
-//                 Tab(icon: FaIcon(Icons.chat)),
-//                 Tab(icon: FaIcon(FontAwesomeIcons.broadcastTower)),
-//               ],
-//             ),
-//             title: Text('Chats and Announcements'),
-//           ),
-//           body: TabBarView(children: [
-//             /////=========================
-//             ChatGroupList(),
-//             ////
-//             BroadCastTab(),
-//           ]),
-//         ),
-//       ),
-//     );

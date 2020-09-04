@@ -4,12 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
-//https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
-// DateTime today = new DateTime.now();
-final DateTime now = DateTime.now();
-// final DateFormat formatter = DateFormat('yyyy-MM-dd');
-// final String formattedDate = formatter.format(now);
-
 class BroadCastTab extends StatefulWidget {
   @override
   _BroadCastTabState createState() => _BroadCastTabState();
@@ -64,30 +58,28 @@ class _BroadCastTabState extends State<BroadCastTab> {
               for (var message in messages) {
                 final messageText = message.data['text'];
                 final messageSender = message.data['sender'];
+                final timeOfMsg = message.data['timeOfMsg'];
                 final currentUser = loggedInUser.email;
                 final messageWidget = Bubble(
                   sender: messageSender,
                   text: messageText,
+                  timeOfMsg: timeOfMsg,
                   itsMeOrNot: currentUser == messageSender,
                 );
                 messageWidgets.add(messageWidget);
               }
               return Expanded(
-                child: ListView(
-                  reverse: true,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-                  children: messageWidgets,
-                ),
-              );
+                  child: ListView(
+                      reverse: true,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
+                      children: messageWidgets));
             },
           ),
           Container(
             decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(color: Colors.pinkAccent, width: 2.0),
-              ),
-            ),
+                border: Border(
+                    top: BorderSide(color: Colors.pinkAccent, width: 2.0))),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -107,12 +99,14 @@ class _BroadCastTabState extends State<BroadCastTab> {
                 ),
                 FlatButton(
                   onPressed: () {
-                    //send functionality
+                    //https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
+                    final DateTime now = DateTime.now();
                     clearMessage.clear(); // Clears the message
                     _firestore.collection('broadcast').add({
                       'text': messageText,
                       'sender': loggedInUser.email,
                       'time': Timestamp.now().millisecondsSinceEpoch,
+                      'timeOfMsg': DateFormat().format(now),
                     });
                   },
                   child: Text(
@@ -134,10 +128,11 @@ class _BroadCastTabState extends State<BroadCastTab> {
 }
 
 class Bubble extends StatelessWidget {
-  Bubble({this.sender, this.text, this.itsMeOrNot});
+  Bubble({this.sender, this.text, this.itsMeOrNot, this.timeOfMsg});
 
   final String sender;
   final String text;
+  final String timeOfMsg;
   final bool itsMeOrNot;
 
   @override
@@ -148,8 +143,8 @@ class Bubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            "${DateFormat().format(now)} -School Management",
-            style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+            "${timeOfMsg} -School Management",
+            style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w900),
           ),
           Material(
             borderRadius: BorderRadius.circular(30.0),

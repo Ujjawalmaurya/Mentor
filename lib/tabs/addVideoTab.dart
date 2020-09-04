@@ -330,6 +330,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
                       height: MediaQuery.of(context).size.height * 0.05,
                     ),
                     Container(
+                      height: 50.0,
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: RaisedButton(
                         onPressed: () {
@@ -339,7 +340,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
                           }
                         },
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
+                            borderRadius: BorderRadius.circular(25.0)),
                         elevation: 15.0,
                         child: Text(
                           'Upload Video',
