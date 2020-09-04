@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mentor_digishala/loginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -112,17 +113,28 @@ class _chatTabState extends State<chatTab> {
                   FlatButton(
                     onPressed: () {
                       //send functionality
-                      final DateTime now = DateTime
-                          .now(); //https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
+                      //condition to check empty messge and nulls
+                      if (messageText != null &&
+                          messageText.trim().length != 0) {
+                        final DateTime now = DateTime
+                            .now(); //https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
 
-                      clearMessage.clear(); // Clears the message
-                      _firestore.collection(widget.studentClass).add({
-                        'text': messageText,
-                        'sender': loggedInUser.email,
-                        'time': Timestamp.now().millisecondsSinceEpoch,
-                        'timeOfMsg': DateFormat.jms().format(now),
-                        'dateOfMsg': DateFormat.yMMMMd().format(now),
-                      });
+                        clearMessage.clear(); // Clears the message
+                        _firestore.collection(widget.studentClass).add({
+                          'text': messageText,
+                          'sender': loggedInUser.email,
+                          'time': Timestamp.now().millisecondsSinceEpoch,
+                          'timeOfMsg': DateFormat.jms().format(now),
+                          'dateOfMsg': DateFormat.yMMMMd().format(now),
+                        });
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: 'Enter text',
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            toastLength: Toast.LENGTH_SHORT);
+                        clearMessage.clear();
+                      }
                     },
                     child: Text(
                       'Send',

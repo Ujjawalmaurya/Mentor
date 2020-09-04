@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 class BroadCastTab extends StatefulWidget {
@@ -100,14 +101,24 @@ class _BroadCastTabState extends State<BroadCastTab> {
                 FlatButton(
                   onPressed: () {
                     //https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
-                    final DateTime now = DateTime.now();
-                    clearMessage.clear(); // Clears the message
-                    _firestore.collection('broadcast').add({
-                      'text': messageText,
-                      'sender': loggedInUser.email,
-                      'time': Timestamp.now().millisecondsSinceEpoch,
-                      'timeOfMsg': DateFormat().format(now),
-                    });
+                    //condition to check empty messge and nulls
+                    if (messageText != null && messageText.trim().length != 0) {
+                      final DateTime now = DateTime.now();
+                      clearMessage.clear(); // Clears the message
+                      _firestore.collection('broadcast').add({
+                        'text': messageText,
+                        'sender': loggedInUser.email,
+                        'time': Timestamp.now().millisecondsSinceEpoch,
+                        'timeOfMsg': DateFormat().format(now),
+                      });
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: 'Enter text',
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          toastLength: Toast.LENGTH_SHORT);
+                      clearMessage.clear();
+                    }
                   },
                   child: Text(
                     'Announce',
