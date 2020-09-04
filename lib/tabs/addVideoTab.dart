@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../constants.dart';
@@ -98,6 +99,11 @@ class _AddVideoTabState extends State<AddVideoTab> {
     setState(() {
       isUploading = false;
     });
+    Fluttertoast.showToast(
+        msg: 'Link Uploaded to db',
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   titleChanger() {
@@ -163,9 +169,18 @@ class _AddVideoTabState extends State<AddVideoTab> {
   @override
   Widget build(BuildContext context) {
     return isUploading == true
-        ? Center(
-            child: CircularProgressIndicator(
-              backgroundColor: Colors.deepPurple,
+        ? Container(
+            height: MediaQuery.of(context).size.height / 1,
+            width: MediaQuery.of(context).size.width / 1,
+            color: Colors.white,
+            child: SpinKitThreeBounce(
+              itemBuilder: (BuildContext context, int index) {
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: index.isEven ? Colors.red : Colors.green,
+                  ),
+                );
+              },
             ),
           )
         : SingleChildScrollView(

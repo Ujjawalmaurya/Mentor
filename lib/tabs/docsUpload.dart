@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mentor_digishala/constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -387,8 +388,19 @@ class _DocsUploadState extends State<DocsUpload> {
   @override
   Widget build(BuildContext context) {
     return isLoading == 'true'
-        ? Center(
-            child: CircularProgressIndicator(),
+        ? Container(
+            height: MediaQuery.of(context).size.height / 1,
+            width: MediaQuery.of(context).size.width / 1,
+            color: Colors.white,
+            child: SpinKitSpinningCircle(
+              itemBuilder: (BuildContext context, int index) {
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: index.isEven ? Colors.green : Colors.red,
+                  ),
+                );
+              },
+            ),
           )
         : Container(
             padding: EdgeInsets.all(8.0),

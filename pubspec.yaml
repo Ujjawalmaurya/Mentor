@@ -24,6 +24,7 @@ dependencies:
   url_launcher: ^5.5.0
   rflutter_alert: ^1.0.3
   google_nav_bar:
+  flutter_spinkit: "^4.1.2"
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentor_digishala/constants.dart';
@@ -140,10 +141,17 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
   Widget build(BuildContext context) {
     return isLoading == 'true'
         ? Container(
-            child: Center(
-              child: CircularProgressIndicator(
-                backgroundColor: kThemeColor,
-              ),
+            height: MediaQuery.of(context).size.height / 1,
+            width: MediaQuery.of(context).size.width / 1,
+            color: Colors.white,
+            child: SpinKitSquareCircle(
+              itemBuilder: (BuildContext context, int index) {
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: index.isEven ? Colors.purple : Colors.red,
+                  ),
+                );
+              },
             ),
           )
         : Container(

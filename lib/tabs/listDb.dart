@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -262,10 +263,17 @@ class _ListDbState extends State<ListDb> {
           Expanded(
               child: isLoading == 'true'
                   ? Container(
-                      alignment: Alignment.center,
-                      height: MediaQuery.of(context).size.height / 10,
-                      child: CircularProgressIndicator(
-                        backgroundColor: kThemeColor,
+                      height: MediaQuery.of(context).size.height / 1,
+                      width: MediaQuery.of(context).size.width / 1,
+                      color: Colors.white,
+                      child: SpinKitWanderingCubes(
+                        itemBuilder: (BuildContext context, int index) {
+                          return DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: index.isEven ? Colors.red : Colors.green,
+                            ),
+                          );
+                        },
                       ),
                     )
                   : ListView.builder(
