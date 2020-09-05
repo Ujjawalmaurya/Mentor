@@ -21,7 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController cPassController = TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
   FirebaseAuth _auth = FirebaseAuth.instance;
-  bool isLoading = false;
+  String isLoading = 'false';
   String email, pass, confPass, errorMsg;
   String studentClass = 'empty';
 
@@ -94,6 +94,9 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   register() async {
+    setState(() {
+      isLoading = 'true';
+    });
     FirebaseApp app = await FirebaseApp.configure(
         name: 'Secondary', options: await FirebaseApp.instance.options);
     return FirebaseAuth.fromApp(app)
@@ -326,10 +329,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                               textColor: Colors.white,
                                             );
                                             clearFields();
+                                            setState(() {
+                                              isLoading = 'false';
+                                            });
                                           }
                                         } catch (e) {
                                           setState(() {
                                             errorMsg = e.message;
+                                            isLoading = 'false';
                                           });
                                           errorDialog();
                                         }

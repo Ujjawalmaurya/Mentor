@@ -148,11 +148,6 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
             backgroundColor: Colors.green,
             textColor: Colors.white);
       });
-    } else {
-      Fluttertoast.showToast(
-          msg: 'Select Class or student will go to Empty section',
-          backgroundColor: Colors.green,
-          textColor: Colors.white);
     }
   }
 

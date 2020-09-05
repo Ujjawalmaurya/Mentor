@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentor_digishala/constants.dart';
+import 'package:mentor_digishala/loginPage.dart';
 import 'package:mentor_digishala/tabs/docsUpload.dart';
 import 'package:mentor_digishala/tabs/listDb.dart';
 import 'package:mentor_digishala/tabs/textingTabs.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'tabs/chatTab.dart';
 import 'tabs/broadCastTab.dart';
 import 'tabs/addVideoTab.dart';
@@ -28,6 +31,51 @@ class _HomePageState extends State<HomePage> {
     ClassChangeTab(),
   ];
 
+  signoutConfmBox(context) {
+    Alert(
+        style: AlertStyle(
+            isCloseButton: false,
+            alertBorder: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            )),
+        context: context,
+        title: "Attention",
+        content: Text(
+          'Do You Want to Logout',
+          style: TextStyle(color: Colors.red),
+        ),
+        buttons: [
+          DialogButton(
+            color: Colors.white,
+            onPressed: () {
+              signOut();
+            },
+            child: Text(
+              "Ok",
+              style: TextStyle(color: Colors.red, fontSize: 20),
+            ),
+          ),
+          DialogButton(
+              color: Colors.white,
+              child: Text(
+                'Cancel',
+                style: TextStyle(color: Colors.green, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              })
+        ]).show();
+  }
+
+  signOut() async {
+    FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(context, MaterialPageRoute(
+      builder: (context) {
+        return LoginScreen();
+      },
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,6 +96,12 @@ class _HomePageState extends State<HomePage> {
                 tooltip: "Add New Student",
                 onPressed: () {
                   Navigator.pushNamed(context, "signup");
+                }),
+            IconButton(
+                icon: FaIcon(FontAwesomeIcons.signOutAlt),
+                tooltip: "Add New Student",
+                onPressed: () {
+                  signoutConfmBox(context);
                 }),
           ],
         ),
