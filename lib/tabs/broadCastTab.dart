@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:mentor_digishala/constants.dart';
 
 class BroadCastTab extends StatefulWidget {
   @override
@@ -51,8 +53,16 @@ class _BroadCastTabState extends State<BroadCastTab> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
-                    child: CircularProgressIndicator(
-                        backgroundColor: Colors.yellowAccent));
+                    child: Container(
+                        height: MediaQuery.of(context).size.height * 0.8,
+                        width: MediaQuery.of(context).size.width * 1,
+                        child: SpinKitCubeGrid(
+                            itemBuilder: (BuildContext context, int index) {
+                          return DecoratedBox(
+                              decoration: BoxDecoration(
+                                  color:
+                                      index.isEven ? Colors.red : kThemeColor));
+                        })));
               }
               final messages = snapshot.data.documents.reversed;
               List<Bubble> messageWidgets = [];

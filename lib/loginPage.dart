@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: MediaQuery.of(context).size.height / 1,
             width: MediaQuery.of(context).size.width / 1,
             color: Color(0xff3C40C6),
-            child: SpinKitWave(
+            child: SpinKitWanderingCubes(
               itemBuilder: (BuildContext context, int index) {
                 return DecoratedBox(
                   decoration: BoxDecoration(
@@ -112,28 +112,30 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Form(
                   key: _key,
                   child: Card(
-                    margin: EdgeInsets.all(
-                        MediaQuery.of(context).size.width * 0.05),
+                    elevation: 25.0,
+                    margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.05,
+                      right: MediaQuery.of(context).size.width * 0.05,
+                      top: MediaQuery.of(context).size.height * 0.08,
+                      bottom: MediaQuery.of(context).size.height * 0.2,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.width * 0.02)),
                           Container(
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
+                                borderRadius: BorderRadius.circular(25.0),
                                 image: DecorationImage(
                                     image:
                                         AssetImage('assets/loginAsset.jpg'))),
-                            width: MediaQuery.of(context).size.width * 0.95,
-                            height: MediaQuery.of(context).size.width * 0.58,
+                            width: MediaQuery.of(context).size.width * 0.90,
+                            height: MediaQuery.of(context).size.width * 0.6,
                           ),
 
-                          SizedBox(height: 20.0),
+                          SizedBox(height: 10.0),
                           //==========
                           //Username
                           ////========
@@ -180,9 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     });
                                     print(this.pass);
                                   })),
-                          Padding(
-                              padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * 0.02)),
+                          SizedBox(height: 25),
                           Container(
                               height: 50.0,
                               width: MediaQuery.of(context).size.width * 0.65,
@@ -206,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           BorderRadius.circular(25.0)))),
                           Padding(
                               padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * 0.035)),
+                                  MediaQuery.of(context).size.height * 0.12)),
                         ],
                       ),
                     ),
