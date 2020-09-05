@@ -17,15 +17,20 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
   Map datakey = new Map();
   String isLoading = 'false';
   String studentClass = "empty";
+  String selectedClass = 'empty';
 
   getData() async {
-    if (true) {
+    if (selectedClass != 'empty') {
       setState(() {
         isLoading = 'true';
         snapShotdata.clear();
         datakey.clear();
       });
-      final db = FirebaseDatabase.instance.reference().child('studentInfos');
+      final db = FirebaseDatabase.instance
+          .reference()
+          .child('studentInfos')
+          .orderByChild('class')
+          .equalTo(selectedClass);
 
       db.once().then((DataSnapshot snapshot) {
         Map<dynamic, dynamic> values = snapshot.value;
@@ -35,7 +40,7 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
             isLoading = 'false';
           });
           Fluttertoast.showToast(
-              msg: 'No videos uploaded in this section',
+              msg: 'No Student register in this Class',
               gravity: ToastGravity.BOTTOM,
               backgroundColor: Colors.red,
               toastLength: Toast.LENGTH_LONG);
@@ -47,6 +52,7 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
             });
           }
           setState(() {
+            selectedClass = 'empty';
             isLoading = 'false';
           });
         }
@@ -95,7 +101,8 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
                   '7',
                   '8',
                   '9',
-                  '10'
+                  '10',
+                  'expelled'
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -122,18 +129,37 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
   }
 
   changeClassFunc(uid) async {
-    FirebaseDatabase.instance
-        .reference()
-        .child('studentInfos')
-        .child(uid)
-        .update({"class": studentClass});
-    getData();
+    if (studentClass != 'empty') {
+      setState(() {
+        isLoading = 'true';
+        datakey.clear();
+        snapShotdata.clear();
+      });
+      FirebaseDatabase.instance
+          .reference()
+          .child('studentInfos')
+          .child(uid)
+          .update({"class": studentClass}).whenComplete(() {
+        setState(() {
+          isLoading = 'false';
+        });
+        Fluttertoast.showToast(
+            msg: 'Sucessfully Updated',
+            backgroundColor: Colors.green,
+            textColor: Colors.white);
+      });
+    } else {
+      Fluttertoast.showToast(
+          msg: 'Select Class or student will go to Empty section',
+          backgroundColor: Colors.green,
+          textColor: Colors.white);
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    getData();
+
     print(datakey.toString());
   }
 
@@ -154,29 +180,93 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
               },
             ),
           )
-        : Container(
-            child: ListView.builder(
-              itemCount: datakey.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    snapShotdata[index]['userEmail'],
-                    style: TextStyle(fontSize: 18.0),
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                child: ListTile(
+                  leading: Text('Select Class'),
+                  trailing: DropdownButton<String>(
+                    icon: Icon(Icons.arrow_drop_down),
+                    value: (this.selectedClass == 'empty')
+                        ? null
+                        : this.selectedClass,
+                    hint: Text('Select class'),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: TextStyle(color: Colors.deepPurple),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        selectedClass = newValue;
+                      });
+                    },
+                    items: <String>[
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
+                      '6',
+                      '7',
+                      '8',
+                      '9',
+                      '10',
+                      'expelled',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
-                  onTap: () {
-                    popClassSelctor(context, snapShotdata[index]["userUid"]);
+                ),
+              ),
+              Divider(),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: RaisedButton(
+                  elevation: 15,
+                  onPressed: () {
+                    getData();
                   },
-                  trailing: Text(
-                    snapShotdata[index]['class'],
-                    style: TextStyle(color: kThemeColor, fontSize: 20.0),
-                  ),
-                  leading: FaIcon(
-                    FontAwesomeIcons.userGraduate,
-                    color: kThemeColor,
-                  ),
-                );
-              },
-            ),
+                  child:
+                      Text('Get student list', style: TextStyle(fontSize: 20)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  color: kThemeColor,
+                  textColor: Colors.white,
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: datakey.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        snapShotdata[index]['userEmail'],
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                      onTap: () {
+                        popClassSelctor(
+                            context, snapShotdata[index]["userUid"]);
+                      },
+                      trailing: Text(
+                        snapShotdata[index]['class'],
+                        style: TextStyle(color: kThemeColor, fontSize: 20.0),
+                      ),
+                      leading: FaIcon(
+                        FontAwesomeIcons.userGraduate,
+                        color: kThemeColor,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           );
   }
 }
