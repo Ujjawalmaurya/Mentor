@@ -58,8 +58,8 @@ class _chatTabState extends State<chatTab> {
                 if (!snapshot.hasData) {
                   return Center(
                       child: Container(
-                          height: MediaQuery.of(context).size.height * 0.8,
-                          width: MediaQuery.of(context).size.width * 0.1,
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          width: MediaQuery.of(context).size.width * 1,
                           child: SpinKitCubeGrid(
                               itemBuilder: (BuildContext context, int index) {
                             return DecoratedBox(

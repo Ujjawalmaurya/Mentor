@@ -169,7 +169,7 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
               itemBuilder: (BuildContext context, int index) {
                 return DecoratedBox(
                   decoration: BoxDecoration(
-                    color: index.isEven ? Colors.purple : Colors.red,
+                    color: index.isEven ? kThemeColor : Colors.red,
                   ),
                 );
               },

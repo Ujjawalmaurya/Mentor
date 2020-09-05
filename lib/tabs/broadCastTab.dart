@@ -54,7 +54,7 @@ class _BroadCastTabState extends State<BroadCastTab> {
               if (!snapshot.hasData) {
                 return Center(
                     child: Container(
-                        height: MediaQuery.of(context).size.height * 0.8,
+                        height: MediaQuery.of(context).size.height * 0.7,
                         width: MediaQuery.of(context).size.width * 1,
                         child: SpinKitCubeGrid(
                             itemBuilder: (BuildContext context, int index) {
