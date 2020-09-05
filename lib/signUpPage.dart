@@ -361,7 +361,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                           BorderRadius.circular(25.0)))),
                           Padding(
                               padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * 0.035)),
+                                  MediaQuery.of(context).size.height * 0.1)),
                         ],
                       ),
                     ),
