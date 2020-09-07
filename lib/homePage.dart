@@ -7,11 +7,10 @@ import 'package:mentor_digishala/tabs/docsUpload.dart';
 import 'package:mentor_digishala/tabs/listDb.dart';
 import 'package:mentor_digishala/tabs/textingTabs.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'tabs/chatTab.dart';
-import 'tabs/broadCastTab.dart';
+
 import 'tabs/addVideoTab.dart';
 import 'tabs/classChangeTab.dart';
-import 'tabs/chatGroupList.dart';
+
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -69,11 +68,8 @@ class _HomePageState extends State<HomePage> {
 
   signOut() async {
     FirebaseAuth.instance.signOut();
-    Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) {
-        return LoginScreen();
-      },
-    ));
+    Navigator.pushNamedAndRemoveUntil(
+        context, LoginScreen.id, (route) => false);
   }
 
   @override
@@ -82,7 +78,11 @@ class _HomePageState extends State<HomePage> {
       home: Scaffold(
         extendBody: true,
         appBar: AppBar(
-          title: const Text('Mentor -DigiShala'),
+          title: Text(
+            'Mentor -DigiShala',
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.aspectRatio * 40),
+          ),
           backgroundColor: kThemeColor,
           actions: [
             IconButton(

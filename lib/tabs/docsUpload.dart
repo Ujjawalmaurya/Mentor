@@ -4,11 +4,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mentor_digishala/constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -495,30 +492,44 @@ class _DocsUploadState extends State<DocsUpload> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      RaisedButton(
-                        elevation: 15.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        onPressed: () {
-                          getFireStoreData();
-                        },
-                        color: kThemeColor,
-                        child: Text(
-                          'Fetch Documents',
-                          style: TextStyle(color: Colors.white, fontSize: 16.0),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.38,
+                        height: MediaQuery.of(context).size.height * 0.04,
+                        child: RaisedButton(
+                          elevation: 15.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          onPressed: () {
+                            getFireStoreData();
+                          },
+                          color: kThemeColor,
+                          child: Text('Fetch Documents',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.aspectRatio *
+                                          40)),
                         ),
                       ),
-                      RaisedButton(
-                        elevation: 15.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        onPressed: () {
-                          docTitleGetter(context);
-                        },
-                        color: kThemeColor,
-                        child: Text(
-                          'Upload Document',
-                          style: TextStyle(color: Colors.white, fontSize: 16.0),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.40,
+                        height: MediaQuery.of(context).size.height * 0.04,
+                        child: RaisedButton(
+                          elevation: 15.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          onPressed: () {
+                            docTitleGetter(context);
+                          },
+                          color: kThemeColor,
+                          child: Text(
+                            'Upload Document',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.aspectRatio *
+                                        40),
+                          ),
                         ),
                       ),
                     ],

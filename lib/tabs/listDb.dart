@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentor_digishala/constants.dart';
 
@@ -244,13 +241,15 @@ class _ListDbState extends State<ListDb> {
           ),
           Container(
             width: MediaQuery.of(context).size.width * 0.7,
+            height: MediaQuery.of(context).size.height * 0.04,
             child: RaisedButton(
               elevation: 15,
               onPressed: () {
                 getData();
               },
-              child:
-                  Text('Fetch Video Details', style: TextStyle(fontSize: 20)),
+              child: Text('Fetch Video Details',
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.aspectRatio * 40)),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
               color: kThemeColor,

@@ -345,7 +345,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
                       height: MediaQuery.of(context).size.height * 0.05,
                     ),
                     Container(
-                      height: 50.0,
+                      height: MediaQuery.of(context).size.height * 0.05,
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: RaisedButton(
                         onPressed: () {
@@ -359,7 +359,9 @@ class _AddVideoTabState extends State<AddVideoTab> {
                         elevation: 15.0,
                         child: Text(
                           'Upload Video',
-                          style: TextStyle(fontSize: 20.0),
+                          style: TextStyle(
+                              fontSize:
+                                  MediaQuery.of(context).size.aspectRatio * 40),
                         ),
                         color: kThemeColor,
                         textColor: Colors.white,

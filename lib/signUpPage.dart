@@ -5,7 +5,6 @@ import 'constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mentor_digishala/homePage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -20,7 +19,6 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController passController = TextEditingController();
   TextEditingController cPassController = TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
-  FirebaseAuth _auth = FirebaseAuth.instance;
   String isLoading = 'false';
   String email, pass, confPass, errorMsg;
   String studentClass = 'empty';

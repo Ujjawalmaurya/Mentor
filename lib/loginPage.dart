@@ -38,7 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
       if (user != null) {
         //Navigation
 
-        Navigator.pushReplacementNamed(context, HomePage.id);
+        Navigator.pushNamedAndRemoveUntil(
+            context, HomePage.id, (route) => false);
       }
     } catch (e) {
       setState(() {

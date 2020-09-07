@@ -222,14 +222,17 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
               ),
               Divider(),
               Container(
-                width: MediaQuery.of(context).size.width * 0.7,
+                width: MediaQuery.of(context).size.width * 0.40,
+                height: MediaQuery.of(context).size.height * 0.04,
                 child: RaisedButton(
                   elevation: 15,
                   onPressed: () {
                     getData();
                   },
-                  child:
-                      Text('Get student list', style: TextStyle(fontSize: 20)),
+                  child: Text('Get student list',
+                      style: TextStyle(
+                          fontSize:
+                              MediaQuery.of(context).size.aspectRatio * 40)),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)),
                   color: kThemeColor,

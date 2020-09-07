@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -54,7 +53,7 @@ class _BroadCastTabState extends State<BroadCastTab> {
               if (!snapshot.hasData) {
                 return Center(
                     child: Container(
-                        height: MediaQuery.of(context).size.height * 0.7,
+                        height: MediaQuery.of(context).size.height * 0.5,
                         width: MediaQuery.of(context).size.width * 1,
                         child: SpinKitCubeGrid(
                             itemBuilder: (BuildContext context, int index) {
