@@ -220,16 +220,15 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
                   ),
                 ),
               ),
-              Divider(),
               Container(
-                width: MediaQuery.of(context).size.width * 0.40,
-                height: MediaQuery.of(context).size.height * 0.04,
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.height * 0.07,
                 child: RaisedButton(
                   elevation: 15,
                   onPressed: () {
                     getData();
                   },
-                  child: Text('Get student list',
+                  child: Text('Get students list',
                       style: TextStyle(
                           fontSize:
                               MediaQuery.of(context).size.aspectRatio * 40)),
@@ -239,6 +238,9 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
                   textColor: Colors.white,
                 ),
               ),
+              Divider(
+                  color: kThemeColor,
+                  height: MediaQuery.of(context).size.height * 0.07),
               Expanded(
                 child: ListView.builder(
                   itemCount: datakey.length,

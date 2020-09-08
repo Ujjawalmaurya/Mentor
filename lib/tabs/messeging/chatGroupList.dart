@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentor_digishala/constants.dart';
-import 'package:mentor_digishala/tabs/chatTab.dart';
+import 'package:mentor_digishala/tabs/messeging/chatTab.dart';
 
 class ChatGroupList extends StatefulWidget {
   @override

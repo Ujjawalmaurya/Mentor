@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentor_digishala/constants.dart';
-import 'package:mentor_digishala/tabs/broadCastTab.dart';
-import 'package:mentor_digishala/tabs/chatGroupList.dart';
+import 'package:mentor_digishala/tabs/messeging/broadCastTab.dart';
+import 'package:mentor_digishala/tabs/messeging/chatGroupList.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class TextingTabs extends StatefulWidget {

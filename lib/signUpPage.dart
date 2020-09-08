@@ -158,11 +158,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   key: _key,
                   child: Card(
                     margin: EdgeInsets.all(
-                        MediaQuery.of(context).size.width * 0.05),
+                        MediaQuery.of(context).size.width * 0.06),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: SingleChildScrollView(
+                      padding: EdgeInsets.all(8.0),
                       child: Column(
                         children: <Widget>[
                           Padding(

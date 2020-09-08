@@ -488,13 +488,12 @@ class _DocsUploadState extends State<DocsUpload> {
                     ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                  // Divider(height: MediaQuery.of(context).size.height / 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.38,
-                        height: MediaQuery.of(context).size.height * 0.04,
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        height: MediaQuery.of(context).size.height * 0.07,
                         child: RaisedButton(
                           elevation: 15.0,
                           shape: RoundedRectangleBorder(
@@ -503,7 +502,7 @@ class _DocsUploadState extends State<DocsUpload> {
                             getFireStoreData();
                           },
                           color: kThemeColor,
-                          child: Text('Fetch Documents',
+                          child: Text('Fetch',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize:
@@ -512,8 +511,8 @@ class _DocsUploadState extends State<DocsUpload> {
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.40,
-                        height: MediaQuery.of(context).size.height * 0.04,
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        height: MediaQuery.of(context).size.height * 0.07,
                         child: RaisedButton(
                           elevation: 15.0,
                           shape: RoundedRectangleBorder(
@@ -523,7 +522,7 @@ class _DocsUploadState extends State<DocsUpload> {
                           },
                           color: kThemeColor,
                           child: Text(
-                            'Upload Document',
+                            'Upload',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize:
@@ -535,8 +534,8 @@ class _DocsUploadState extends State<DocsUpload> {
                     ],
                   ),
                   Divider(
-                    height: MediaQuery.of(context).size.height / 20,
-                  ),
+                      height: MediaQuery.of(context).size.height / 20,
+                      color: kThemeColor),
                   Expanded(
                       child: getData == 'true'
                           ? CircularProgressIndicator()

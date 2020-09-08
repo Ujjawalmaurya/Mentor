@@ -4,7 +4,7 @@ import 'package:mentor_digishala/landingPage.dart';
 import 'package:mentor_digishala/loginPage.dart';
 import 'package:mentor_digishala/signUpPage.dart';
 import 'package:mentor_digishala/tabs/classChangeTab.dart';
-import 'package:mentor_digishala/tabs/textingTabs.dart';
+import 'package:mentor_digishala/tabs/messeging/textingTabs.dart';
 
 void main() {
   runApp(MyApp());

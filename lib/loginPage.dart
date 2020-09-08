@@ -115,11 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Card(
                     elevation: 25.0,
                     margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.05,
-                      right: MediaQuery.of(context).size.width * 0.05,
-                      top: MediaQuery.of(context).size.height * 0.08,
-                      bottom: MediaQuery.of(context).size.height * 0.2,
-                    ),
+                        left: MediaQuery.of(context).size.width * 0.06,
+                        right: MediaQuery.of(context).size.width * 0.06,
+                        top: MediaQuery.of(context).size.height * 0.08,
+                        bottom: MediaQuery.of(context).size.height * 0.17),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -132,8 +131,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 image: DecorationImage(
                                     image:
                                         AssetImage('assets/loginAsset.jpg'))),
-                            width: MediaQuery.of(context).size.width * 0.90,
-                            height: MediaQuery.of(context).size.width * 0.6,
+                            width: MediaQuery.of(context).size.width * 0.85,
+                            height: MediaQuery.of(context).size.width * 0.55,
                           ),
 
                           SizedBox(height: 10.0),

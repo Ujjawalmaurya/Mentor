@@ -239,9 +239,10 @@ class _ListDbState extends State<ListDb> {
               }).toList(),
             ),
           ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.04),
           Container(
             width: MediaQuery.of(context).size.width * 0.7,
-            height: MediaQuery.of(context).size.height * 0.04,
+            height: MediaQuery.of(context).size.height * 0.07,
             child: RaisedButton(
               elevation: 15,
               onPressed: () {
@@ -257,7 +258,7 @@ class _ListDbState extends State<ListDb> {
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-          Divider(),
+          Divider(color: kThemeColor),
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
           Expanded(
               child: isLoading == 'true'
@@ -278,13 +279,18 @@ class _ListDbState extends State<ListDb> {
                   : ListView.builder(
                       itemCount: datakey.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: Icon(FontAwesomeIcons.solidFileVideo,
-                              color: kThemeColor),
-                          title: Text(snapShotdata[index]['title']),
-                          onLongPress: () {
-                            deleteCnfmBox(datakey[index], index);
-                          },
+                        return Column(
+                          children: [
+                            ListTile(
+                              leading: Icon(FontAwesomeIcons.solidFileVideo,
+                                  color: kThemeColor),
+                              title: Text(snapShotdata[index]['title']),
+                              onLongPress: () {
+                                deleteCnfmBox(datakey[index], index);
+                              },
+                            ),
+                            Divider(color: kThemeColor),
+                          ],
                         );
                       }))
         ]));

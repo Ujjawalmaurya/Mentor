@@ -4,13 +4,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentor_digishala/constants.dart';
 import 'package:mentor_digishala/loginPage.dart';
 import 'package:mentor_digishala/tabs/docsUpload.dart';
-import 'package:mentor_digishala/tabs/listDb.dart';
-import 'package:mentor_digishala/tabs/textingTabs.dart';
+import 'package:mentor_digishala/tabs/videoTabs/listDb.dart';
+import 'package:mentor_digishala/tabs/messeging/textingTabs.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
-import 'tabs/addVideoTab.dart';
+import 'tabs/videoTabs/addVideoTab.dart';
 import 'tabs/classChangeTab.dart';
-
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -81,7 +79,7 @@ class _HomePageState extends State<HomePage> {
           title: Text(
             'Mentor -DigiShala',
             style: TextStyle(
-                fontSize: MediaQuery.of(context).size.aspectRatio * 40),
+                fontSize: MediaQuery.of(context).size.aspectRatio * 34),
           ),
           backgroundColor: kThemeColor,
           actions: [
@@ -137,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     GButton(
                       icon: FontAwesomeIcons.dochub,
-                      text: 'Fetch Documents',
+                      text: 'Fetch Docs',
                     ),
                     GButton(
                       icon: FontAwesomeIcons.calendarAlt,
