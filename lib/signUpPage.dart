@@ -322,7 +322,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                             //Message after sucessfull user creation
                                             Fluttertoast.showToast(
                                               msg:
-                                                  "${newUser.user.email}+ Added Sucesfully in database",
+                                                  "${newUser.user.email} + Added Sucesfully in database",
                                               gravity: ToastGravity.CENTER,
                                               backgroundColor: Colors.green,
                                               textColor: Colors.white,

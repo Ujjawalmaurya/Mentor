@@ -175,98 +175,100 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
               },
             ),
           )
-        : Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                child: ListTile(
-                  leading: Text('Select Class'),
-                  trailing: DropdownButton<String>(
-                    icon: Icon(Icons.arrow_drop_down),
-                    value: (this.selectedClass == 'empty')
-                        ? null
-                        : this.selectedClass,
-                    hint: Text('Select class'),
-                    iconSize: 24,
-                    elevation: 16,
-                    style: TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        selectedClass = newValue;
-                      });
+        : Container(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                    child: ListTile(
+                        leading: Text('Select Class'),
+                        trailing: DropdownButton<String>(
+                          icon: Icon(Icons.arrow_drop_down),
+                          value: (this.selectedClass == 'empty')
+                              ? null
+                              : this.selectedClass,
+                          hint: Text('Select class'),
+                          iconSize: 24,
+                          elevation: 16,
+                          style: TextStyle(color: kThemeColor),
+                          underline: Container(
+                            height: 2,
+                            color: kThemeColor,
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              selectedClass = newValue;
+                            });
+                          },
+                          items: <String>[
+                            '1',
+                            '2',
+                            '3',
+                            '4',
+                            '5',
+                            '6',
+                            '7',
+                            '8',
+                            '9',
+                            '10',
+                            'expelled',
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ))),
+                SizedBox(height: 20.0),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.width * 0.11,
+                  child: RaisedButton(
+                    elevation: 15,
+                    onPressed: () {
+                      getData();
                     },
-                    items: <String>[
-                      '1',
-                      '2',
-                      '3',
-                      '4',
-                      '5',
-                      '6',
-                      '7',
-                      '8',
-                      '9',
-                      '10',
-                      'expelled',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                    child: Text('Get students list',
+                        style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.035)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    color: kThemeColor,
+                    textColor: Colors.white,
                   ),
                 ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: MediaQuery.of(context).size.height * 0.07,
-                child: RaisedButton(
-                  elevation: 15,
-                  onPressed: () {
-                    getData();
-                  },
-                  child: Text('Get students list',
-                      style: TextStyle(
-                          fontSize:
-                              MediaQuery.of(context).size.aspectRatio * 40)),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  color: kThemeColor,
-                  textColor: Colors.white,
+                Divider(
+                    color: kThemeColor,
+                    height: MediaQuery.of(context).size.height * 0.07),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: datakey.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                          snapShotdata[index]['userEmail'],
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        onTap: () {
+                          popClassSelctor(
+                              context, snapShotdata[index]["userUid"]);
+                        },
+                        trailing: Text(
+                          snapShotdata[index]['class'],
+                          style: TextStyle(color: kThemeColor, fontSize: 20.0),
+                        ),
+                        leading: FaIcon(
+                          FontAwesomeIcons.userGraduate,
+                          color: kThemeColor,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              Divider(
-                  color: kThemeColor,
-                  height: MediaQuery.of(context).size.height * 0.07),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: datakey.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(
-                        snapShotdata[index]['userEmail'],
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                      onTap: () {
-                        popClassSelctor(
-                            context, snapShotdata[index]["userUid"]);
-                      },
-                      trailing: Text(
-                        snapShotdata[index]['class'],
-                        style: TextStyle(color: kThemeColor, fontSize: 20.0),
-                      ),
-                      leading: FaIcon(
-                        FontAwesomeIcons.userGraduate,
-                        color: kThemeColor,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
+              ],
+            ),
           );
   }
 }

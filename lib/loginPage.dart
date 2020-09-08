@@ -204,6 +204,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(25.0)))),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FlatButton(
+                                    height: 12.0,
+                                    onPressed: () {},
+                                    child: Text(" Terms and conditions",
+                                        style: TextStyle(fontSize: 10.0))),
+                                FlatButton(
+                                    height: 12.0,
+                                    onPressed: () {},
+                                    child: Text("Privacy Policy",
+                                        style: TextStyle(fontSize: 10.0)))
+                              ]),
                           Padding(
                               padding: EdgeInsets.all(
                                   MediaQuery.of(context).size.height * 0.12)),

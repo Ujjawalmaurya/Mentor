@@ -21,26 +21,29 @@ class _TextingTabsState extends State<TextingTabs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kThemeColor,
-        title: const Text('Chats and Announcements'),
-      ),
+          backgroundColor: kThemeColor,
+          title: Text(
+            'Chats and Announcements',
+            style:
+                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.056),
+          )),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(color: kThemeColor, boxShadow: [
-          BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+          BoxShadow(blurRadius: 20, color: kThemeColor.withOpacity(.3))
         ]),
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
             child: GNav(
                 color: Colors.white,
-                gap: 10,
+                gap: MediaQuery.of(context).size.width * 0.03,
                 activeColor: Colors.white,
-                iconSize: 25,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                duration: Duration(milliseconds: 800),
+                iconSize: MediaQuery.of(context).size.width * 0.055,
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3.5),
+                duration: Duration(milliseconds: 500),
                 tabBackgroundColor: Colors.pinkAccent,
                 tabs: [
                   GButton(

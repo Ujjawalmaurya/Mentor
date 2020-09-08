@@ -36,9 +36,9 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(20),
             )),
         context: context,
-        title: "Attention",
+        title: "Attention!!",
         content: Text(
-          'Do You Want to Logout',
+          'Do You Want to Logout??',
           style: TextStyle(color: Colors.red),
         ),
         buttons: [
@@ -78,8 +78,8 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text(
             'Mentor -DigiShala',
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.aspectRatio * 34),
+            style:
+                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.056),
           ),
           backgroundColor: kThemeColor,
           actions: [
@@ -115,14 +115,15 @@ class _HomePageState extends State<HomePage> {
           ]),
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 6),
               child: GNav(
                   color: Colors.white,
-                  gap: 15,
+                  gap: MediaQuery.of(context).size.width * 0.08,
                   activeColor: Colors.white,
-                  iconSize: 25,
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                  duration: Duration(milliseconds: 800),
+                  iconSize: MediaQuery.of(context).size.width * 0.055,
+                  // iconSize: 25.0,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  duration: Duration(milliseconds: 500),
                   tabBackgroundColor: kThemeColor,
                   tabs: [
                     GButton(
@@ -135,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     GButton(
                       icon: FontAwesomeIcons.dochub,
-                      text: 'Fetch Docs',
+                      text: 'Documents',
                     ),
                     GButton(
                       icon: FontAwesomeIcons.calendarAlt,

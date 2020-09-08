@@ -239,10 +239,10 @@ class _ListDbState extends State<ListDb> {
               }).toList(),
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
           Container(
             width: MediaQuery.of(context).size.width * 0.7,
-            height: MediaQuery.of(context).size.height * 0.07,
+            height: MediaQuery.of(context).size.width * 0.11,
             child: RaisedButton(
               elevation: 15,
               onPressed: () {
@@ -250,16 +250,17 @@ class _ListDbState extends State<ListDb> {
               },
               child: Text('Fetch Video Details',
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.aspectRatio * 40)),
+                      fontSize: MediaQuery.of(context).size.height * 0.035)),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)),
+                  borderRadius: BorderRadius.circular(30.0)),
               color: kThemeColor,
               textColor: Colors.white,
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-          Divider(color: kThemeColor),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          Divider(
+            color: kThemeColor,
+            height: MediaQuery.of(context).size.height * 0.05,
+          ),
           Expanded(
               child: isLoading == 'true'
                   ? Container(
