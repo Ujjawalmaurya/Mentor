@@ -353,8 +353,8 @@ class _AddVideoTabState extends State<AddVideoTab> {
                             color: kThemeColor,
                           ),
                           Container(
-                            height: MediaQuery.of(context).size.width * 0.11,
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: MediaQuery.of(context).size.width * 0.10,
+                            width: MediaQuery.of(context).size.width * 0.5,
                             child: RaisedButton(
                               onPressed: () {
                                 if (_key.currentState.validate()) {
@@ -365,11 +365,10 @@ class _AddVideoTabState extends State<AddVideoTab> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0)),
                               elevation: 15.0,
-                              child: Text('Upload Video',
-                                  style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height *
-                                              0.035)),
+                              child: FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text('Upload Video'),
+                              ),
                               color: kThemeColor,
                               textColor: Colors.white,
                             ),

@@ -22,10 +22,11 @@ class _TextingTabsState extends State<TextingTabs> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: kThemeColor,
-          title: Text(
-            'Chats and Announcements',
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.056),
+          title: FittedBox(
+            fit: BoxFit.contain,
+            child: Text(
+              'Chats and Announcements',
+            ),
           )),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

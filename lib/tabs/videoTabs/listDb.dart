@@ -241,16 +241,17 @@ class _ListDbState extends State<ListDb> {
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
           Container(
-            width: MediaQuery.of(context).size.width * 0.7,
+            width: MediaQuery.of(context).size.width * 0.5,
             height: MediaQuery.of(context).size.width * 0.11,
             child: RaisedButton(
               elevation: 15,
               onPressed: () {
                 getData();
               },
-              child: Text('Fetch Video Details',
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.height * 0.035)),
+              child: FittedBox(
+                child: Text('Fetch Video Details'),
+                fit: BoxFit.contain,
+              ),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0)),
               color: kThemeColor,

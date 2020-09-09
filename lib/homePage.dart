@@ -76,10 +76,11 @@ class _HomePageState extends State<HomePage> {
       home: Scaffold(
         extendBody: true,
         appBar: AppBar(
-          title: Text(
-            'Mentor -DigiShala',
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.056),
+          title: FittedBox(
+            fit: BoxFit.contain,
+            child: Text(
+              'Mentor -DigiShala',
+            ),
           ),
           backgroundColor: kThemeColor,
           actions: [
