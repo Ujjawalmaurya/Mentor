@@ -5,6 +5,8 @@ import 'package:mentor_digishala/constants.dart';
 import 'package:mentor_digishala/homePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mentor_digishala/policy.dart';
+import 'package:mentor_digishala/terms.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'loginPage';
@@ -118,110 +120,118 @@ class _LoginScreenState extends State<LoginScreen> {
                         left: MediaQuery.of(context).size.width * 0.06,
                         right: MediaQuery.of(context).size.width * 0.06,
                         top: MediaQuery.of(context).size.height * 0.08,
-                        bottom: MediaQuery.of(context).size.height * 0.17),
+                        bottom: MediaQuery.of(context).size.height * 0.16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25.0),
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/loginAsset.jpg'))),
-                            width: MediaQuery.of(context).size.width * 0.85,
-                            height: MediaQuery.of(context).size.width * 0.55,
-                          ),
-
-                          SizedBox(height: 10.0),
-                          //==========
-                          //Username
-                          ////========
-                          ListTile(
-                            leading: FaIcon(FontAwesomeIcons.userAlt,
-                                color: kThemeColor),
-                            title: TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (input) {
-                                if (input.isEmpty) {
-                                  return 'Username is required';
-                                }
-                              },
-                              decoration:
-                                  InputDecoration(labelText: "Username"),
-                              onSaved: (input) {
-                                setState(() {
-                                  email = input + '@mentor.nca';
-                                });
-                                print(this.email);
-                              },
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  image: DecorationImage(
+                                      image:
+                                          AssetImage('assets/loginAsset.jpg'))),
+                              width: MediaQuery.of(context).size.width * 0.85,
+                              height: MediaQuery.of(context).size.width * 0.55,
                             ),
-                          ),
-                          ////==============
-                          ///Password
-                          ////==============
-                          ListTile(
-                              leading: FaIcon(FontAwesomeIcons.keycdn,
+
+                            SizedBox(height: 10.0),
+                            //==========
+                            //Username
+                            ////========
+                            ListTile(
+                              leading: FaIcon(FontAwesomeIcons.userAlt,
                                   color: kThemeColor),
                               title: TextFormField(
-                                  obscureText: true,
-                                  validator: (input) {
-                                    if (input.isEmpty) {
-                                      return 'Password is required';
-                                    } else if (input.length < 6) {
-                                      return 'Password is too short';
-                                    }
-                                  },
-                                  decoration:
-                                      InputDecoration(labelText: "Password"),
-                                  onSaved: (input) {
-                                    setState(() {
-                                      pass = input;
-                                    });
-                                    print(this.pass);
-                                  })),
-                          SizedBox(height: 25),
-                          Container(
-                              height: 50.0,
-                              width: MediaQuery.of(context).size.width * 0.65,
-                              /////////////////////////////////////////////////////
-                              ///===================Get-IN Button=======///////////
-                              /////////////////////////////////////////////////////
-                              child: RaisedButton(
-                                  onPressed: () {
-                                    if (_key.currentState.validate()) {
-                                      _key.currentState.save();
-                                      signIn();
-                                    }
-                                  },
-                                  color: Colors.redAccent,
-                                  splashColor: Colors.deepPurpleAccent,
-                                  child: Text("Get in",
-                                      style: TextStyle(
-                                          fontSize: 20.0, color: Colors.white)),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(25.0)))),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                FlatButton(
-                                    height: 12.0,
-                                    onPressed: () {},
-                                    child: Text(" Terms and conditions",
-                                        style: TextStyle(fontSize: 10.0))),
-                                FlatButton(
-                                    height: 12.0,
-                                    onPressed: () {},
-                                    child: Text("Privacy Policy",
-                                        style: TextStyle(fontSize: 10.0)))
-                              ]),
-                          Padding(
-                              padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * 0.12)),
-                        ],
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (input) {
+                                  if (input.isEmpty) {
+                                    return 'Username is required';
+                                  }
+                                },
+                                decoration:
+                                    InputDecoration(labelText: "Username"),
+                                onSaved: (input) {
+                                  setState(() {
+                                    email = input + '@mentor.nca';
+                                  });
+                                  print(this.email);
+                                },
+                              ),
+                            ),
+                            ////==============
+                            ///Password
+                            ////==============
+                            ListTile(
+                                leading: FaIcon(FontAwesomeIcons.keycdn,
+                                    color: kThemeColor),
+                                title: TextFormField(
+                                    obscureText: true,
+                                    validator: (input) {
+                                      if (input.isEmpty) {
+                                        return 'Password is required';
+                                      } else if (input.length < 6) {
+                                        return 'Password is too short';
+                                      }
+                                    },
+                                    decoration:
+                                        InputDecoration(labelText: "Password"),
+                                    onSaved: (input) {
+                                      setState(() {
+                                        pass = input;
+                                      });
+                                      print(this.pass);
+                                    })),
+                            SizedBox(height: 25),
+                            Container(
+                                height: 50.0,
+                                width: MediaQuery.of(context).size.width * 0.65,
+
+                                ///===================Get-IN Button=======///////////
+                                child: RaisedButton(
+                                    onPressed: () {
+                                      if (_key.currentState.validate()) {
+                                        _key.currentState.save();
+                                        signIn();
+                                      }
+                                    },
+                                    color: Colors.redAccent,
+                                    splashColor: Colors.deepPurpleAccent,
+                                    child: Text("Get in",
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Colors.white)),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25.0)))),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FlatButton(
+                                      height: 12.0,
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, TermsnC.id);
+                                      },
+                                      child: Text(" Terms and conditions",
+                                          style: TextStyle(fontSize: 10.0))),
+                                  FlatButton(
+                                      height: 12.0,
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, Policy.id);
+                                      },
+                                      child: Text("Privacy Policy",
+                                          style: TextStyle(fontSize: 10.0)))
+                                ]),
+                            Padding(
+                                padding: EdgeInsets.all(
+                                    MediaQuery.of(context).size.height * 0.12)),
+                          ],
+                        ),
                       ),
                     ),
                   ),
