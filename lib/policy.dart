@@ -28,7 +28,7 @@ class _PolicyState extends State<Policy> {
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 20.0),
               Text(
-                  "Navoday Children's Academy built the NCA DigiShala app as a Free app. This SERVICE is provided by Navoday Children's Academy at no cost and is intended for use as is.",
+                  "Navoday Children's Academy built the Mentor -DigiShala app as a Free app. This SERVICE is provided by Navoday Children's Academy at no cost and is intended for use as is.",
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.037)),
               SizedBox(height: 10.0),
@@ -152,7 +152,7 @@ class _PolicyState extends State<Policy> {
                       fontWeight: FontWeight.w500)),
               SizedBox(height: 5.0),
               Text(
-                  "These Services do not address anyone under the age of 5. We do not knowingly collect personally identifiable information from children under 5. In the case we discover that a child under 5 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions.",
+                  "These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions.",
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.037)),
               SizedBox(height: 15.0),
@@ -162,7 +162,7 @@ class _PolicyState extends State<Policy> {
                       fontWeight: FontWeight.w500)),
               SizedBox(height: 5.0),
               Text(
-                  "We may ask for storage permission to store user data and Media Files.",
+                  "We may ask for storage permission for user to pick Documents or Media Files .",
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.037)),
               SizedBox(height: 15.0),
