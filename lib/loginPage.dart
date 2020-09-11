@@ -212,7 +212,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   FlatButton(
-                                      height: 12.0,
                                       onPressed: () {
                                         Navigator.pushNamed(
                                             context, TermsnC.id);
@@ -220,7 +219,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: Text(" Terms and conditions",
                                           style: TextStyle(fontSize: 10.0))),
                                   FlatButton(
-                                      height: 12.0,
                                       onPressed: () {
                                         Navigator.pushNamed(context, Policy.id);
                                       },

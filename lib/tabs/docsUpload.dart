@@ -492,8 +492,8 @@ class _DocsUploadState extends State<DocsUpload> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        height: MediaQuery.of(context).size.width * 0.11,
+                        width: MediaQuery.of(context).size.width * 0.40,
+                        height: MediaQuery.of(context).size.width * 0.09,
                         child: RaisedButton(
                           elevation: 15.0,
                           shape: RoundedRectangleBorder(
@@ -502,32 +502,34 @@ class _DocsUploadState extends State<DocsUpload> {
                             getFireStoreData();
                           },
                           color: kThemeColor,
-                          child: Text('Fetch',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: MediaQuery.of(context).size.height *
-                                      0.035)),
+                          child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text('Fetch',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ))),
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        height: MediaQuery.of(context).size.width * 0.11,
+                        width: MediaQuery.of(context).size.width * 0.40,
+                        height: MediaQuery.of(context).size.width * 0.09,
                         child: RaisedButton(
-                          elevation: 15.0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
-                          onPressed: () {
-                            docTitleGetter(context);
-                          },
-                          color: kThemeColor,
-                          child: Text(
-                            'Upload',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.035),
-                          ),
-                        ),
+                            elevation: 15.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0)),
+                            onPressed: () {
+                              docTitleGetter(context);
+                            },
+                            color: kThemeColor,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(
+                                'Upload',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )),
                       ),
                     ],
                   ),

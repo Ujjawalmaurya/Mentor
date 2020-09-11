@@ -222,17 +222,15 @@ class _ClassChangeTabState extends State<ClassChangeTab> {
                         ))),
                 SizedBox(height: 20.0),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  height: MediaQuery.of(context).size.width * 0.11,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.width * 0.10,
                   child: RaisedButton(
                     elevation: 15,
                     onPressed: () {
                       getData();
                     },
-                    child: Text('Get students list',
-                        style: TextStyle(
-                            fontSize:
-                                MediaQuery.of(context).size.height * 0.035)),
+                    child: FittedBox(
+                        fit: BoxFit.contain, child: Text('Get students list')),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0)),
                     color: kThemeColor,
