@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
 //SignIn with email Fxn
-  signIn() async {
+  Future<void> signIn() async {
     setState(() {
       isLoading = 'true';
     });
@@ -40,8 +40,6 @@ class _LoginScreenState extends State<LoginScreen> {
       if (user != null) {
         //Navigation
 
-        Navigator.pushNamedAndRemoveUntil(
-            context, HomePage.id, (route) => false);
       }
     } catch (e) {
       setState(() {

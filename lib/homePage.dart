@@ -64,10 +64,13 @@ class _HomePageState extends State<HomePage> {
         ]).show();
   }
 
-  signOut() async {
-    FirebaseAuth.instance.signOut();
-    Navigator.pushNamedAndRemoveUntil(
-        context, LoginScreen.id, (route) => false);
+  Future<void> signOut() async {
+    try {
+      Navigator.of(context, rootNavigator: true).pop();
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
