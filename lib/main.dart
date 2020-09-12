@@ -69,6 +69,5 @@ class _AppState extends State<MyApp> {
       theme: ThemeData.light(),
       // home: LoginScreen(),
     );
-    ;
   }
 }
