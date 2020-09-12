@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:58025287589:android:9935b5c64a8edf8d25d24c",
+        "mobilesdk_app_id": "1:58025287589:android:feb4b06f970bcc5525d24c",
         "android_client_info": {
-          "package_name": "com.example.mentor_digishala"
+          "package_name": "com.nca.digishala"
         }
       },
       "oauth_client": [
         {
-          "client_id": "58025287589-h48bllq0divao9nq09g26gtiunhisvkr.apps.googleusercontent.com",
+          "client_id": "58025287589-thuqg43d7jh709c4i1udke0m8sof2d4d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.mentor_digishala",
+            "package_name": "com.nca.digishala",
             "certificate_hash": "8483a664eba1a8884f49968ebaad5f71307cbe8c"
           }
         },
@@ -45,18 +45,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:58025287589:android:feb4b06f970bcc5525d24c",
+        "mobilesdk_app_id": "1:58025287589:android:588d10cf62a7b04225d24c",
         "android_client_info": {
-          "package_name": "com.nca.digishala"
+          "package_name": "com.nca.mentor_digishala"
         }
       },
       "oauth_client": [
         {
-          "client_id": "58025287589-thuqg43d7jh709c4i1udke0m8sof2d4d.apps.googleusercontent.com",
+          "client_id": "58025287589-afgbuhr4ehe1cgddd8anmdtnb8lt2dfv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.nca.digishala",
-            "certificate_hash": "8483a664eba1a8884f49968ebaad5f71307cbe8c"
+            "package_name": "com.nca.mentor_digishala",
+            "certificate_hash": "31a1bec3f4c21305f1599758fc5c1fbd2066692e"
           }
         },
         {
