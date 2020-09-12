@@ -12,14 +12,14 @@ import 'package:mentor_digishala/tabs/messeging/textingTabs.dart';
 import 'package:mentor_digishala/terms.dart';
 
 void main() {
-  runApp(App());
+  runApp(MyApp());
 }
 
-class App extends StatefulWidget {
+class MyApp extends StatefulWidget {
   _AppState createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends State<MyApp> {
   // Set default `_initialized` and `_error` state to false
   bool _initialized = false;
   bool _error = false;
