@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mentor_digishala/authProvider.dart';
 import 'package:mentor_digishala/constants.dart';
 import 'package:mentor_digishala/loginPage.dart';
 import 'package:mentor_digishala/tabs/docsUpload.dart';
@@ -66,8 +65,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   signOut() async {
-    Navigator.of(context, rootNavigator: true).pop();
-    AuthProvider().signOut();
+    FirebaseAuth.instance.signOut();
+    Navigator.pushNamedAndRemoveUntil(
+        context, LoginScreen.id, (route) => false);
   }
 
   @override
