@@ -24,7 +24,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
   TextEditingController linkc = TextEditingController();
   GlobalKey<FormState> _key = GlobalKey<FormState>();
   userGetter() async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    User user = FirebaseAuth.instance.currentUser;
     print(user.email);
   }
 

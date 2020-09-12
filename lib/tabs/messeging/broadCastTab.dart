@@ -13,10 +13,10 @@ class BroadCastTab extends StatefulWidget {
 
 class _BroadCastTabState extends State<BroadCastTab> {
   final clearMessage = TextEditingController();
-  final _firestore = Firestore.instance;
+  final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
-  FirebaseUser loggedInUser;
+  User loggedInUser;
   String messageText;
 
   @override
@@ -27,7 +27,7 @@ class _BroadCastTabState extends State<BroadCastTab> {
 
   void getCurrentUser() async {
     try {
-      final user = await _auth.currentUser();
+      final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
         print(loggedInUser.email);
@@ -63,12 +63,12 @@ class _BroadCastTabState extends State<BroadCastTab> {
                                       index.isEven ? Colors.red : kThemeColor));
                         })));
               }
-              final messages = snapshot.data.documents.reversed;
+              final messages = snapshot.data.docs.reversed;
               List<Bubble> messageWidgets = [];
               for (var message in messages) {
-                final messageText = message.data['text'];
-                final messageSender = message.data['sender'];
-                final timeOfMsg = message.data['timeOfMsg'];
+                final messageText = message.data()['text'];
+                final messageSender = message.data()['sender'];
+                final timeOfMsg = message.data()['timeOfMsg'];
                 final currentUser = loggedInUser.email;
                 final messageWidget = Bubble(
                   sender: messageSender,

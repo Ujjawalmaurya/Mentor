@@ -15,9 +15,9 @@ class chatTab extends StatefulWidget {
 
 class _chatTabState extends State<chatTab> {
   final clearMessage = TextEditingController();
-  final _firestore = Firestore.instance;
+  final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
+  User loggedInUser;
   String messageText;
 
   @override
@@ -28,7 +28,7 @@ class _chatTabState extends State<chatTab> {
 
   void getCurrentUser() async {
     try {
-      final user = await _auth.currentUser();
+      final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
         print(loggedInUser.email);
@@ -67,14 +67,14 @@ class _chatTabState extends State<chatTab> {
                                         : kThemeColor));
                           })));
                 }
-                final messages = snapshot.data.documents.reversed;
+                final messages = snapshot.data.docs.reversed;
                 List<Bubble> messageWidgets = [];
                 for (var message in messages) {
-                  final messageText = message.data['text'];
-                  final messageSender = message.data['sender'];
-                  final messageTime = message.data['time'];
-                  final timeOfMsg = message.data['timeOfMsg'];
-                  final dateOfMsg = message.data['dateOfMsg'];
+                  final messageText = message.data()['text'];
+                  final messageSender = message.data()['sender'];
+                  final messageTime = message.data()['time'];
+                  final timeOfMsg = message.data()['timeOfMsg'];
+                  final dateOfMsg = message.data()['dateOfMsg'];
                   final currentUser = loggedInUser.email;
                   final messageWidget = Bubble(
                     sender: messageSender,

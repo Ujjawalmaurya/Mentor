@@ -28,19 +28,15 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     print('signin executed');
     try {
-      AuthResult result = await _auth
+      final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: this.email, password: this.pass)
           .whenComplete(() {
         setState(() {
           isLoading = 'false';
         });
       });
-      final FirebaseUser user = result.user;
+      final User user = FirebaseAuth.instance.currentUser;
       print(user);
-      if (user != null) {
-        //Navigation
-
-      }
     } catch (e) {
       setState(() {
         errorMsg = e.message;
