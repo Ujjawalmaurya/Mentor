@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mentor_digishala/constants.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class BroadCastTab extends StatefulWidget {
   @override
@@ -15,10 +16,9 @@ class _BroadCastTabState extends State<BroadCastTab> {
   final clearMessage = TextEditingController();
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
-
   User loggedInUser;
   String messageText;
-
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   void initState() {
     super.initState();
@@ -111,14 +111,18 @@ class _BroadCastTabState extends State<BroadCastTab> {
                   onPressed: () {
                     //https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
                     //condition to check empty messge and nulls
+
                     if (messageText != null && messageText.trim().length != 0) {
-                      final DateTime now = DateTime.now();
-                      clearMessage.clear(); // Clears the message
-                      _firestore.collection('broadcast').add({
-                        'text': messageText,
-                        'sender': loggedInUser.email,
-                        'time': Timestamp.now().millisecondsSinceEpoch,
-                        'timeOfMsg': DateFormat().format(now),
+                      _firebaseMessaging.getToken().then((value) {
+                        final DateTime now = DateTime.now();
+                        clearMessage.clear(); // Clears the message
+                        _firestore.collection('broadcast').add({
+                          'text': messageText,
+                          'sender': loggedInUser.email,
+                          'time': Timestamp.now().millisecondsSinceEpoch,
+                          'timeOfMsg': DateFormat().format(now),
+                          'token': value
+                        });
                       });
                     } else {
                       Fluttertoast.showToast(
