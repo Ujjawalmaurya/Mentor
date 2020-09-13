@@ -18,7 +18,6 @@ class _BroadCastTabState extends State<BroadCastTab> {
   final _auth = FirebaseAuth.instance;
   User loggedInUser;
   String messageText;
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   void initState() {
     super.initState();
@@ -113,16 +112,13 @@ class _BroadCastTabState extends State<BroadCastTab> {
                     //condition to check empty messge and nulls
 
                     if (messageText != null && messageText.trim().length != 0) {
-                      _firebaseMessaging.getToken().then((value) {
-                        final DateTime now = DateTime.now();
-                        clearMessage.clear(); // Clears the message
-                        _firestore.collection('broadcast').add({
-                          'text': messageText,
-                          'sender': loggedInUser.email,
-                          'time': Timestamp.now().millisecondsSinceEpoch,
-                          'timeOfMsg': DateFormat().format(now),
-                          'token': value
-                        });
+                      final DateTime now = DateTime.now();
+                      clearMessage.clear(); // Clears the message
+                      _firestore.collection('broadcast').add({
+                        'text': messageText,
+                        'sender': loggedInUser.email,
+                        'time': Timestamp.now().millisecondsSinceEpoch,
+                        'timeOfMsg': DateFormat().format(now),
                       });
                     } else {
                       Fluttertoast.showToast(
