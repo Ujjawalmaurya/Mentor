@@ -5,7 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mentor_digishala/constants.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 class BroadCastTab extends StatefulWidget {
   @override
