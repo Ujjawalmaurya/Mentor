@@ -10,6 +10,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'tabs/videoTabs/addVideoTab.dart';
 import 'tabs/classChangeTab.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'HomePage';
@@ -66,10 +67,34 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> signOut() async {
     try {
+      final storage = new FlutterSecureStorage();
+
       Navigator.of(context, rootNavigator: true).pop();
+      await storage.deleteAll();
       await FirebaseAuth.instance.signOut();
     } catch (e) {
       print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    killoldLogin();
+  }
+
+  killoldLogin() async {
+    final storage = new FlutterSecureStorage();
+    String parentEmail = await storage.read(key: 'email');
+    String parentPass = await storage.read(key: 'pass');
+    print(parentEmail);
+
+    if (parentEmail == null && parentPass == null) {
+      try {
+        await FirebaseAuth.instance.signOut();
+      } catch (e) {
+        print(e);
+      }
     }
   }
 

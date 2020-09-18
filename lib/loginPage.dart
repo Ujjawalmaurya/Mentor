@@ -40,7 +40,9 @@ class _LoginScreenState extends State<LoginScreen> {
         });
       });
       final User user = FirebaseAuth.instance.currentUser;
-      print(user);
+      String parentEmail = await storage.read(key: 'email');
+
+      print(parentEmail);
     } catch (e) {
       setState(() {
         errorMsg = e.message;
