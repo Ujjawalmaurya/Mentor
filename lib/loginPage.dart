@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentor_digishala/policy.dart';
 import 'package:mentor_digishala/terms.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'loginPage';
@@ -27,6 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
       isLoading = 'true';
     });
     print('signin executed');
+    final storage = new FlutterSecureStorage();
+    await storage.write(key: 'email', value: email);
+    await storage.write(key: 'pass', value: pass);
     try {
       final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: this.email, password: this.pass)

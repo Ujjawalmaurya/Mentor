@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SignUpPage extends StatefulWidget {
   static const String id = 'registration';
@@ -22,6 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String isLoading = 'false';
   String email, pass, confPass, errorMsg;
   String studentClass = 'empty';
+  User tempUser;
 
   //Error dialogbox
   errorDialog() {
@@ -91,29 +93,44 @@ class _SignUpPageState extends State<SignUpPage> {
     usernameController.clear();
   }
 
-  register() async {
+  Future register() async {
     setState(() {
       isLoading = 'true';
     });
-    FirebaseApp app = await FirebaseApp.configure(
-        name: 'Secondary', options: await FirebaseApp.instance.options);
-    return FirebaseAuth.fromApp(app)
+
+    UserCredential userCredential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: pass);
+    User user = FirebaseAuth.instance.currentUser;
+    setState(() {
+      tempUser = user;
+    });
+    final storage = new FlutterSecureStorage();
+    String parentEmail = await storage.read(key: 'email');
+    String parentPass = await storage.read(key: 'pass');
+    print(parentEmail);
+
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: parentEmail, password: parentPass);
   }
 
   writeUUIdWithClass(newUser) async {
     final dRefrence = FirebaseDatabase.instance.reference();
-    if (newUser != null) {
-      final dbReference =
-          dRefrence.child("studentInfos").child(newUser.user.uid);
+    print(tempUser.email);
+    if (tempUser != null) {
+      final dbReference = dRefrence.child("studentInfos").child(tempUser.uid);
       await dbReference.set({
         "class": studentClass,
-        "userEmail": newUser.user.email,
-        "userUid": newUser.user.uid,
+        "userEmail": tempUser.email,
+        "userUid": tempUser.uid,
       }).catchError((e) {
         print(e.toString());
-      }).whenComplete(() => clearFields());
+      }).whenComplete(() {
+        clearFields();
+      });
     } else {
+      setState(() {
+        isLoading = 'false';
+      });
       Fluttertoast.showToast(
           msg: "Oops",
           toastLength: Toast.LENGTH_SHORT,
@@ -316,13 +333,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if (pass == confPass &&
                                           studentClass != 'empty') {
                                         try {
-                                          final newUser = await register();
-                                          if (newUser != null) {
-                                            writeUUIdWithClass(newUser);
+                                          await register();
+
+                                          if (tempUser != null) {
+                                            writeUUIdWithClass(tempUser);
                                             //Message after sucessfull user creation
                                             Fluttertoast.showToast(
                                               msg:
-                                                  "${newUser.user.email} + Added Sucesfully in database",
+                                                  "${tempUser.email} + Added Sucesfully in database",
                                               gravity: ToastGravity.CENTER,
                                               backgroundColor: Colors.green,
                                               textColor: Colors.white,
