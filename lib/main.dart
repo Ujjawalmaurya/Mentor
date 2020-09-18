@@ -50,7 +50,9 @@ class _AppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // Show a loader until FlutterFire is initialized
     if (!_initialized) {
-      return CircularProgressIndicator();
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
 
     return MaterialApp(
