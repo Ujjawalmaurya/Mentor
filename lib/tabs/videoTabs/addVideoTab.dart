@@ -187,8 +187,13 @@ class _AddVideoTabState extends State<AddVideoTab> {
             child: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(
-                    top: 30.0, bottom: 20.0, left: 10.0, right: 10.0),
-                height: MediaQuery.of(context).size.height * 1,
+                  top: 30.0,
+                  bottom: 20.0,
+                  left: 10.0,
+                  right: 10.0,
+                ),
+
+                // height: MediaQuery.of(context).size.height * 0.9,
                 width: MediaQuery.of(context).size.width * 1,
                 alignment: Alignment.topCenter,
                 child: Form(
@@ -235,7 +240,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
                             ),
                           ),
                           Divider(
-                            height: MediaQuery.of(context).size.height * 0.06,
+                            height: MediaQuery.of(context).size.height * 0.07,
                             color: kThemeColor,
                           ),
                           ListTile(
@@ -320,7 +325,7 @@ class _AddVideoTabState extends State<AddVideoTab> {
                           Divider(
                               color: kThemeColor,
                               height:
-                                  MediaQuery.of(context).size.height * 0.06),
+                                  MediaQuery.of(context).size.height * 0.07),
                           Container(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -349,12 +354,13 @@ class _AddVideoTabState extends State<AddVideoTab> {
                             ),
                           ),
                           Divider(
-                            height: MediaQuery.of(context).size.height * 0.06,
+                            height: MediaQuery.of(context).size.height * 0.07,
                             color: kThemeColor,
                           ),
                           Container(
-                            height: MediaQuery.of(context).size.width * 0.10,
-                            width: MediaQuery.of(context).size.width * 0.5,
+                            // Upload Button
+                            height: MediaQuery.of(context).size.width * 0.11,
+                            width: MediaQuery.of(context).size.width * 0.65,
                             child: RaisedButton(
                               onPressed: () {
                                 if (_key.currentState.validate()) {

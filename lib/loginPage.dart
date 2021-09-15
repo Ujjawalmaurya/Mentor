@@ -100,135 +100,138 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
           )
-        : Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  "assets/login.png",
+        : Scaffold(
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/login.png",
+                  ),
+                  fit: BoxFit.cover,
+                  alignment: Alignment.center,
                 ),
-                fit: BoxFit.cover,
-                alignment: Alignment.center,
               ),
-            ),
-            child: SafeArea(
-              child: Center(
-                child: Form(
-                  key: _key,
-                  child: Card(
-                    elevation: 25.0,
-                    margin: EdgeInsets.only(
+              child: SafeArea(
+                child: Center(
+                  child: Form(
+                    key: _key,
+                    child: Card(
+                      elevation: 25.0,
+                      margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.06,
                         right: MediaQuery.of(context).size.width * 0.06,
-                        top: MediaQuery.of(context).size.height * 0.08,
-                        bottom: MediaQuery.of(context).size.height * 0.16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  image: DecorationImage(
-                                      image:
-                                          AssetImage('assets/loginAsset.jpg'))),
-                              width: MediaQuery.of(context).size.width * 0.85,
-                              height: MediaQuery.of(context).size.width * 0.55,
-                            ),
-
-                            SizedBox(height: 10.0),
-                            //==========
-                            //Username
-                            ////========
-                            ListTile(
-                              leading: FaIcon(FontAwesomeIcons.userAlt,
-                                  color: kThemeColor),
-                              title: TextFormField(
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (input) {
-                                  if (input.isEmpty) {
-                                    return 'Username is required';
-                                  }
-                                },
-                                decoration:
-                                    InputDecoration(labelText: "Username"),
-                                onSaved: (input) {
-                                  setState(() {
-                                    email = input + '@mentor.nca';
-                                  });
-                                  print(this.email);
-                                },
+                        // top: MediaQuery.of(context).size.height * 0.08,
+                        // bottom: MediaQuery.of(context).size.height * 0.16
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/loginAsset.jpg'))),
+                                width: MediaQuery.of(context).size.width * 0.85,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.55,
                               ),
-                            ),
-                            ////==============
-                            ///Password
-                            ////==============
-                            ListTile(
-                                leading: FaIcon(FontAwesomeIcons.keycdn,
+
+                              SizedBox(height: 10.0),
+                              //==========
+                              //Username
+                              ////========
+                              ListTile(
+                                leading: FaIcon(FontAwesomeIcons.userAlt,
                                     color: kThemeColor),
                                 title: TextFormField(
-                                    obscureText: true,
-                                    validator: (input) {
-                                      if (input.isEmpty) {
-                                        return 'Password is required';
-                                      } else if (input.length < 6) {
-                                        return 'Password is too short';
-                                      }
-                                    },
-                                    decoration:
-                                        InputDecoration(labelText: "Password"),
-                                    onSaved: (input) {
-                                      setState(() {
-                                        pass = input;
-                                      });
-                                      print(this.pass);
-                                    })),
-                            SizedBox(height: 25),
-                            Container(
-                                height: 50.0,
-                                width: MediaQuery.of(context).size.width * 0.65,
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (input) {
+                                    if (input.isEmpty) {
+                                      return 'Username is required';
+                                    }
+                                  },
+                                  decoration:
+                                      InputDecoration(labelText: "Username"),
+                                  onSaved: (input) {
+                                    setState(() {
+                                      email = input + '@mentor.nca';
+                                    });
+                                    print(this.email);
+                                  },
+                                ),
+                              ),
+                              ////==============
+                              ///Password
+                              ////==============
+                              ListTile(
+                                  leading: FaIcon(FontAwesomeIcons.keycdn,
+                                      color: kThemeColor),
+                                  title: TextFormField(
+                                      obscureText: true,
+                                      validator: (input) {
+                                        if (input.isEmpty) {
+                                          return 'Password is required';
+                                        } else if (input.length < 6) {
+                                          return 'Password is too short';
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                          labelText: "Password"),
+                                      onSaved: (input) {
+                                        setState(() {
+                                          pass = input;
+                                        });
+                                        print(this.pass);
+                                      })),
+                              SizedBox(height: 25),
+                              Container(
+                                  height: 50.0,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.65,
 
-                                ///===================Get-IN Button=======///////////
-                                child: RaisedButton(
-                                    onPressed: () {
-                                      if (_key.currentState.validate()) {
-                                        _key.currentState.save();
-                                        signIn();
-                                      }
-                                    },
-                                    color: Colors.redAccent,
-                                    splashColor: Colors.deepPurpleAccent,
-                                    child: Text("Get in",
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            color: Colors.white)),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(25.0)))),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FlatButton(
+                                  ///===================Get-IN Button=======///////////
+                                  child: RaisedButton(
                                       onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, TermsnC.id);
+                                        if (_key.currentState.validate()) {
+                                          _key.currentState.save();
+                                          signIn();
+                                        }
                                       },
-                                      child: Text(" Terms and conditions",
-                                          style: TextStyle(fontSize: 10.0))),
-                                  FlatButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(context, Policy.id);
-                                      },
-                                      child: Text("Privacy Policy",
-                                          style: TextStyle(fontSize: 10.0)))
-                                ]),
-                            Padding(
-                                padding: EdgeInsets.all(
-                                    MediaQuery.of(context).size.height * 0.12)),
-                          ],
+                                      color: Colors.redAccent,
+                                      splashColor: Colors.deepPurpleAccent,
+                                      child: Text("Get in",
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.white)),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25.0)))),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FlatButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, TermsnC.id);
+                                        },
+                                        child: Text(" Terms and conditions",
+                                            style: TextStyle(fontSize: 10.0))),
+                                    FlatButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, Policy.id);
+                                        },
+                                        child: Text("Privacy Policy",
+                                            style: TextStyle(fontSize: 10.0)))
+                                  ]),
+                            ],
+                          ),
                         ),
                       ),
                     ),

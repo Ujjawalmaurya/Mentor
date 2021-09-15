@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
               signOut();
             },
             child: Text(
-              "Ok",
+              "Log Out",
               style: TextStyle(color: Colors.red, fontSize: 20),
             ),
           ),

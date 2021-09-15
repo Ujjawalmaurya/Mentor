@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:mentor_digishala/homePage.dart';
 import 'package:mentor_digishala/landingPage.dart';
 import 'package:mentor_digishala/loginPage.dart';
@@ -12,6 +13,14 @@ import 'package:mentor_digishala/tabs/messeging/textingTabs.dart';
 import 'package:mentor_digishala/terms.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+// To Hide Navigation bar and Status bar
+  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
+// To hide only status bar
+  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+
   runApp(MyApp());
 }
 
