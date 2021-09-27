@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                 }),
             IconButton(
                 icon: FaIcon(FontAwesomeIcons.signOutAlt),
-                tooltip: "Add New Student",
+                tooltip: "Log out",
                 onPressed: () {
                   signoutConfmBox(context);
                 }),
